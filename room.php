@@ -61,7 +61,7 @@ $room_name = htmlentities($_GET['slug']);
 			<!-- Main -->
 			<p>Send this link to others to allow them to join the conference:</p>
 			<form>
-				<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/' . $room_name; ?>" style="width: 500px">
+				<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
 			</form>
 			
 			<section id="main" style="width:80%">
