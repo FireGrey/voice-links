@@ -1,0 +1,6 @@
+CHANGELOG
+---------
+
+16/04/16
+Merged to GitHub
+

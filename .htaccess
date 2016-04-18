@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+# Rewrite for tags
+RewriteRule ^room/(.*)$ room.php?slug=$1 [L,QSA]
+
+# Remove .php from the end of file names
+# Is requested file a directory?
+RewriteCond %{REQUEST_FILENAME} !-d
+# Is requested file a real .php file?
+RewriteCond %{REQUEST_FILENAME}\.php -f
+# Internal rewrite of blah to blah.php
+RewriteRule ^(.*)$ $1.php
