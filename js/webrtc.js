@@ -120,7 +120,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	video.setAttribute('controls', 'controls');
     
     table_cell_2.appendChild(video);
-    table_row_2.appendChild(table_cell_1);
+    table_row_2.appendChild(table_cell_2);
     
     table.appendChild(table_row_1);
     table.appendChild(table_row_2);
