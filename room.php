@@ -51,18 +51,20 @@ $room_name = htmlentities($_GET['slug']);
 	<body onload="my_init('<?php echo $room_name; ?>')">
 		<!-- Wrapper -->
 		<div id="wrapper">
-			<table>
-				<tr>
-					<td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
-					<td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
-				</tr>
-			</table>
+            <div id="wrapper" style="max-height:300px">
+                <table>
+                    <tr>
+                        <td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
+                        <td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
+                    </tr>
+                </table>
 
-			<!-- Main -->
-			<p>Send this link to others to allow them to join the conference:</p>
-			<form>
-				<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
-			</form>
+                <!-- Main -->
+                <p>Send this link to others to allow them to join the conference:</p>
+                <form>
+                    <input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
+                </form>
+            </div>
 			
 			<section id="main" style="width:80%">
 				<header>
@@ -71,7 +73,9 @@ $room_name = htmlentities($_GET['slug']);
 						<!-- Our box -->
 						<video id="self" width="1" height="1" style="display:none"></video>
 						<div id="client-box">
-							<!-- New clients get a box in here -->
+                            <ul id="client-list" class="users">
+                                <!-- New clients get a box in here -->
+                            </ul>
 						</div>
 				</header>
 			</section>

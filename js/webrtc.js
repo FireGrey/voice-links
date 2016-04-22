@@ -18,7 +18,6 @@ function roomListener(roomName, otherPeers) {
 
 function my_init(roomName) {
 	easyrtc.setSocketUrl(":8080");
-	//easyrtc.setOption("appIceServers", myIceServers);
 	easyrtc.setRoomOccupantListener(roomListener);
 	var connectSuccess = function(myId) {
 		console.log("My easyrtcid is " + myId);
@@ -35,7 +34,7 @@ function my_init(roomName) {
 		},
 		connectFailure
 	);
-	easyrtc.setIceUsedInCalls( {"iceServers": [
+easyrtc.setIceUsedInCalls( {"iceServers": [
 {url:'stun:stun01.sipphone.com'},
 {url:'stun:stun.ekiga.net'},
 {url:'stun:stun.fwdnet.net'},
@@ -71,8 +70,6 @@ credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
 username: '28224511:1379330808'
 }
 ]});
-
-
 }
 
 function performCall(easyrtcid) {
@@ -100,19 +97,36 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 
 easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// create a name tag
-	var user_box = document.getElementById('client-box');
+	var user_box = document.getElementById('client-list');
+	var list_item = document.createElement('li');
+    list_item.setAttribute('id', 'label-' + callerEasyrtcid);
+	var table = document.createElement('table');
+	var table_row_1 = document.createElement('tr');
+	var table_cell_1 = document.createElement('td');
+    
 	label = document.createElement('span');
-	label.setAttribute('id', 'label-' + callerEasyrtcid);
 	label.textContent = 'User ID:' + callerEasyrtcid;
-	user_box.appendChild(label);
-
+	
+    table_cell_1.appendChild(label);
+    table_row_1.appendChild(table_cell_1);
+    
 	// create controls for them
+	var table_row_2 = document.createElement('tr');
+	var table_cell_2 = document.createElement('td');
 	var video = document.createElement('video');
 	video.setAttribute('id', callerEasyrtcid);
 	video.setAttribute('width', '300');
 	video.setAttribute('height', '30');
 	video.setAttribute('controls', 'controls');
-	user_box.appendChild(video);
+    
+    table_cell_2.appendChild(video);
+    table_row_2.appendChild(table_cell_1);
+    
+    table.appendChild(table_row_1);
+    table.appendChild(table_row_2);
+    list_item.appendChild(table);
+    user_box.appendChild(list_item);
+    
 	easyrtc.setVideoObjectSrc(video, stream);
 });
 
