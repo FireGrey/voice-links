@@ -58,7 +58,7 @@ if (!$result->execute()) {
 $result->store_result();
 
 if ($result->num_rows !== 0) {
-	die('There is already a valid room with that name.');
+	die('There is already a valid room with that name. Would you like to <a href="/room/' . $room_name . '">join it</a>?');
 }
 
 // add slug to db with expiry timestamp
