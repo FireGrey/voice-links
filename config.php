@@ -29,7 +29,10 @@ if (LIVE) {
 	Generic Defines
 ******************************/
 define('GENERIC_ERROR', 'Sorry! We cannot load this page. Call for help.');
-// Get the hostname
+// Get the hostname - should be in the format: subdomain.domain.tld:port
+// We get this from the users HOST header so it can not be trusted, we have protected it from XSS however another attack scenario's exist
+// A MitM situation could change this and it may provide the attacker some browser hooking abilities, but tbh
+// if you're being MitM'ed you have larger problems to worry about than your Voice Links server browser hooking you
 define('HOST', htmlentities($_SERVER['HTTP_HOST']));
 
 /******************************
