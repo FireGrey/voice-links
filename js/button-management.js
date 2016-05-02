@@ -9,6 +9,7 @@ Note: Must be called after HTML button has been rendered in DOM - so include at 
 */
 
 // Don't let them start recording if page is about to be unloaded
+// This is mostly useless afaik
 window.onbeforeunload = function() {
 	document.getElementById('start-recording').disabled = false;
 };
@@ -23,7 +24,7 @@ document.getElementById('start-recording').onclick = function() {
 };
 
 // The problem here is media_recorder is set within the record_handle function meaning it
-// can't be referenced too outside that function.
+// can't be referenced outside that function.
 // Investigation into how the code: https://www.webrtc-experiment.com/msr/audio-recorder.html
 // overcomes this issue is required.
 
