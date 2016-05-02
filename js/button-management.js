@@ -18,7 +18,7 @@ document.getElementById('start-recording').onclick = function() {
 	recording = true; // I am recording!
 
 	// Get streams from easyRTC
-	begin_record(getLocalStream());
+	begin_record(easyrtc.getLocalStream());
 };
 
 document.getElementById('stop-recording').onclick = function() {
