@@ -17,16 +17,11 @@ window.onbeforeunload = function() {
 document.getElementById('start-recording').onclick = function() {
 	this.disabled = true;
 	recording = true; // I am recording!
-
 	// Get streams from easyRTC
 	// Just getting our local stream atm to debug
+	// Ultimately this will need to get all the current streams from easyrtc and record them all probably in some sort of loop?
 	record_handle(easyrtc.getLocalStream());
 };
-
-// The problem here is media_recorder is set within the record_handle function meaning it
-// can't be referenced outside that function.
-// Investigation into how the code: https://www.webrtc-experiment.com/msr/audio-recorder.html
-// overcomes this issue is required.
 
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
