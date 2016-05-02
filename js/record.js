@@ -12,10 +12,10 @@ var media_recorder;
 var time_interval = 5000; // time of each audio segment in milliseconds.
 var index = 1;
 var recording = false; // Am I recording yet?
-// Create new MediaSteamRecorder from media-stream-record.js
-var media_recorder = new MediaStreamRecorder(stream);
 
-function begin_record(stream) {
+function record_handle(stream) {
+	// Create new MediaSteamRecorder from media-stream-record.js
+	var media_recorder = new MediaStreamRecorder(stream);
 	// Save in .ogg file format
 	media_recorder.mimeType = 'audio/ogg';
 	// Set the stream

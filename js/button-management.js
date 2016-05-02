@@ -8,7 +8,7 @@ Note: Must be called after HTML button has been rendered in DOM - so include at 
 
 */
 
-// Don't let them start recording until page is fully loaded - can probably be removed
+// Don't let them start recording if page is about to be unloaded
 window.onbeforeunload = function() {
 	document.getElementById('start-recording').disabled = false;
 };
@@ -18,7 +18,8 @@ document.getElementById('start-recording').onclick = function() {
 	recording = true; // I am recording!
 
 	// Get streams from easyRTC
-	begin_record(easyrtc.getLocalStream());
+	// Just getting our local stream atm to debug
+	record_handle(easyrtc.getLocalStream());
 };
 
 document.getElementById('stop-recording').onclick = function() {
