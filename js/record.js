@@ -11,7 +11,6 @@ Note: Must be called before webrtc.js
 var media_recorder;
 var time_interval = 5000; // time of each audio segment in milliseconds.
 var index = 1;
-var audios_container = document.getElementById('audios-container');
 var recording = false; // Am I recording yet?
 
 function begin_record(stream) {
@@ -25,6 +24,7 @@ function begin_record(stream) {
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
 	media_recorder.ondataavailable = function(blob) {
+		var audios_container = document.getElementById('audios-container');
 		var a = document.createElement('a');
 		a.target = '_blank';
 		a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + neaten_bytes(blob.size) + ') Time Length: ' + neaten_time(time_interval);
