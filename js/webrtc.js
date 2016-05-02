@@ -56,8 +56,8 @@ easyrtc.setIceUsedInCalls( {"iceServers": [
 {url:'stun:stun.xten.com'},
 {
 url: 'turn:numb.viagenie.ca',
-credential: 'muazkh',
-username: 'webrtc@live.com'
+	credential: 'muazkh',
+	username: 'webrtc@live.com'
 },
 {
 url: 'turn:192.158.29.39:3478?transport=udp',
@@ -78,7 +78,7 @@ function performCall(easyrtcid) {
 		function(easyrtcid) { console.log("completed call to " + easyrtcid);},
 		function(errorCode, errorText) { console.log("err:" + errorText);},
 		function(accepted, bywho) {
-			console.log((accepted?"accepted":"rejected")+ " by " + bywho);
+			console.log((accepted?"accepted":"rejected") +  " by " + bywho);
 		}
 	);
 }
@@ -128,6 +128,12 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     user_box.appendChild(list_item);
     
 	easyrtc.setVideoObjectSrc(video, stream);
+
+	// Object has been created, check if I am recording
+	if(recording) {
+		// If so, add new stream to the record
+		begin_record(stream);
+	}
 });
 
 easyrtc.setOnStreamClosed(function(callerEasyrtcid) {

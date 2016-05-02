@@ -44,6 +44,8 @@ $room_name = htmlentities($_GET['slug']);
 
 		<script src="//<?php echo HOST; ?>:8080/socket.io/socket.io.js"></script>
 		<script src="//<?php echo HOST; ?>:8080/easyrtc/easyrtc.js"></script>
+		<script src="//<?php echo HOST; ?>/js/media-stream-record.js"></script> <!-- Record Dependancies -->
+		<script src="//<?php echo HOST; ?>/js/record.js"></script>
 		<!-- We add a version to this request to stop the browser caching an old version when we update it -->
 		<script src="//<?php echo HOST; ?>/js/webrtc.js?v=test-<?php echo rand(1000,100000); ?>"></script>
 	</head>
@@ -72,11 +74,22 @@ $room_name = htmlentities($_GET['slug']);
 						<div id="other-clients"> </div><br>
 						<!-- Our box -->
 						<video id="self" width="1" height="1" style="display:none"></video>
+
+						<!-- Recording Controls -->
+						<button id="start-recording">Start</button>
+						<button id="stop-recording" disabled>Stop</button>
+						<button id="pause-recording" disabled>Pause</button>
+						<button id="resume-recording" disabled>Resume</button>
+						<button id="save-recording" disabled>Save</button>
+
 						<div id="client-box">
                             <ul id="client-list" class="users">
                                 <!-- New clients get a box in here -->
                             </ul>
 						</div>
+
+						<!-- EXPERIMENT -->
+						<div id="audios-container"></div>
 				</header>
 			</section>
 
