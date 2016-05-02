@@ -22,6 +22,11 @@ document.getElementById('start-recording').onclick = function() {
 	record_handle(easyrtc.getLocalStream());
 };
 
+// The problem here is media_recorder is set within the record_handle function meaning it
+// can't be referenced too outside that function.
+// Investigation into how the code: https://www.webrtc-experiment.com/msr/audio-recorder.html
+// overcomes this issue is required.
+
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
 	media_recorder.stop();
