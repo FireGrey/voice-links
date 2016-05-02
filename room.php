@@ -54,43 +54,43 @@ $room_name = htmlentities($_GET['slug']);
 	<body onload="my_init('<?php echo $room_name; ?>')">
 		<!-- Wrapper -->
 		<div id="wrapper">
-            <div id="wrapper" style="max-height:300px">
-                <table>
-                    <tr>
-                        <td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
-                        <td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
-                    </tr>
-                </table>
-
-                <!-- Main -->
-                <p>Send this link to others to allow them to join the conference:</p>
-                <form>
-                    <input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
-                </form>
-            </div>
+			<div id="wrapper" style="max-height:300px">
+				<table>
+					<tr>
+						<td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
+						<td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
+					</tr>
+				</table>
+				<!-- Main -->
+				<p>Send this link to others to allow them to join the conference:</p>
+				<form>
+					<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
+				</form>
+			</div>
 			
 			<section id="main" style="width:80%">
 				<header>
-					<h1>Users Currently in this conference:</h1>
-						<div id="other-clients"> </div><br>
-						<!-- Our box -->
-						<video id="self" width="1" height="1" style="display:none"></video>
+					<!-- Recording Controls -->
+					<h1>Recording Options:</h1>
+					<button id="start-recording">Start</button>
+					<button id="stop-recording" disabled>Stop</button>
+					<button id="pause-recording" disabled>Pause</button>
+					<button id="resume-recording" disabled>Resume</button>
+					<button id="save-recording" disabled>Save</button>
+					
+					<h1>Conference Members:</h1>
+					<div id="other-clients"> </div><br>
+					<!-- Our box -->
+					<video id="self" width="1" height="1" style="display:none"></video>
 
-						<!-- Recording Controls -->
-						<button id="start-recording">Start</button>
-						<button id="stop-recording" disabled>Stop</button>
-						<button id="pause-recording" disabled>Pause</button>
-						<button id="resume-recording" disabled>Resume</button>
-						<button id="save-recording" disabled>Save</button>
+					<div id="client-box">
+						<ul id="client-list" class="users">
+							<!-- New clients get a box in here -->
+						</ul>
+					</div>
 
-						<div id="client-box">
-                            <ul id="client-list" class="users">
-                                <!-- New clients get a box in here -->
-                            </ul>
-						</div>
-
-						<!-- EXPERIMENT -->
-						<div id="audios-container"></div>
+					<!-- EXPERIMENT -->
+					<div id="audios-container"></div>
 				</header>
 			</section>
 
