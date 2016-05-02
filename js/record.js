@@ -15,7 +15,7 @@ var recording = false; // Am I recording yet?
 
 function record_handle(stream) {
 	// Create new MediaSteamRecorder from media-stream-record.js
-	var media_recorder = new MediaStreamRecorder(stream);
+	media_recorder = new MediaStreamRecorder(stream);
 	// Save in .ogg file format
 	media_recorder.mimeType = 'audio/ogg';
 	// Set the stream
