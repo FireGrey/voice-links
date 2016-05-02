@@ -14,40 +14,6 @@ var index = 1;
 var audios_container = document.getElementById('audios-container');
 var recording = false; // Am I recording yet?
 
-document.getElementById('start-recording').onclick = function() {
-	this.disabled = true;
-	recording = true; // I am recording!
-
-	// Get streams from easyRTC
-	begin_record(getLocalStream());
-};
-
-document.getElementById('stop-recording').onclick = function() {
-	this.disabled = true;
-	media_recorder.stop();
-	media_recorder.stream.stop();
-	document.getElementById('pause-recording').disabled = true;
-	document.getElementById('start-recording').disabled = false;
-	recording = false; // I have stopped recording
-};
-
-document.getElementById('pause-recording').onclick = function() {
-	this.disabled = true;
-	media_recorder.pause();
-	document.getElementById('resume-recording').disabled = false;
-};
-
-document.getElementById('resume-recording').onclick = function() {
-	this.disabled = true;
-	media_recorder.resume();
-	document.getElementById('pause-recording').disabled = false;
-};
-
-document.getElementById('save-recording').onclick = function() {
-	this.disabled = true;
-	media_recorder.save();
-};
-
 function begin_record(stream) {
 	// Create new MediaSteamRecorder from media-stream-record.js
 	var media_recorder = new MediaStreamRecorder(stream);
@@ -76,11 +42,6 @@ function begin_record(stream) {
 	document.getElementById('pause-recording').disabled = false;
 	document.getElementById('save-recording').disabled = false;
 }
-
-// Don't let them start recording until page is fully loaded - can probably be removed
-window.onbeforeunload = function() {
-	document.getElementById('start-recording').disabled = false;
-};
 
 // convert bytes to megabytes/etc http://goo.gl/B3ae8c
 function neaten_bytes(bytes) {

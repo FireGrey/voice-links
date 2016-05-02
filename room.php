@@ -104,4 +104,6 @@ $room_name = htmlentities($_GET['slug']);
 			</footer>
 		</div> <!-- Close wrapper -->
 	</body>
+	<!-- Other scripts -->
+	<script src="//<?php echo HOST; ?>/js/button-management.js"></script>
 </html>
