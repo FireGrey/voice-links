@@ -45,9 +45,10 @@ $room_name = htmlentities($_GET['slug']);
 		<script src="//<?php echo HOST; ?>:8080/socket.io/socket.io.js"></script>
 		<script src="//<?php echo HOST; ?>:8080/easyrtc/easyrtc.js"></script>
 		<script src="//<?php echo HOST; ?>/js/media-stream-record.js"></script> <!-- Record Dependancies -->
-		<script src="//<?php echo HOST; ?>/js/record.js"></script>
-		<!-- We add a version to this request to stop the browser caching an old version when we update it -->
-		<script src="//<?php echo HOST; ?>/js/webrtc.js?v=test-<?php echo rand(1000,100000); ?>"></script>
+
+		<!-- We add a version to these requests to stop the browser caching old versions of rapidly updating files -->
+		<script src="//<?php echo HOST; ?>/js/record.js?v=t<?php echo rand(1000,100000); ?>"></script>
+		<script src="//<?php echo HOST; ?>/js/webrtc.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	</head>
 
 	<body onload="my_init('<?php echo $room_name; ?>')">

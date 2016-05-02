@@ -14,7 +14,7 @@ var index = 1;
 var audios_container = document.getElementById('audios-container');
 var recording = false; // Am I recording yet?
 
-document.querySelector('#start-recording').onclick = function() {
+document.getElementById('start-recording').onclick = function() {
 	this.disabled = true;
 	recording = true; // I am recording!
 
@@ -22,28 +22,28 @@ document.querySelector('#start-recording').onclick = function() {
 	begin_record(getLocalStream());
 };
 
-document.querySelector('#stop-recording').onclick = function() {
+document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
 	media_recorder.stop();
 	media_recorder.stream.stop();
-	document.querySelector('#pause-recording').disabled = true;
-	document.querySelector('#start-recording').disabled = false;
+	document.getElementById('pause-recording').disabled = true;
+	document.getElementById('start-recording').disabled = false;
 	recording = false; // I have stopped recording
 };
 
-document.querySelector('#pause-recording').onclick = function() {
+document.getElementById('pause-recording').onclick = function() {
 	this.disabled = true;
 	media_recorder.pause();
-	document.querySelector('#resume-recording').disabled = false;
+	document.getElementById('resume-recording').disabled = false;
 };
 
-document.querySelector('#resume-recording').onclick = function() {
+document.getElementById('resume-recording').onclick = function() {
 	this.disabled = true;
 	media_recorder.resume();
-	document.querySelector('#pause-recording').disabled = false;
+	document.getElementById('pause-recording').disabled = false;
 };
 
-document.querySelector('#save-recording').onclick = function() {
+document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	media_recorder.save();
 };
@@ -72,14 +72,14 @@ function begin_record(stream) {
 	// get blob after specific time interval
 	media_recorder.start(time_interval);
 
-	document.querySelector('#stop-recording').disabled = false;
-	document.querySelector('#pause-recording').disabled = false;
-	document.querySelector('#save-recording').disabled = false;
+	document.getElementById('stop-recording').disabled = false;
+	document.getElementById('pause-recording').disabled = false;
+	document.getElementById('save-recording').disabled = false;
 }
 
 // Don't let them start recording until page is fully loaded - can probably be removed
 window.onbeforeunload = function() {
-	document.querySelector('#start-recording').disabled = false;
+	document.getElementById('start-recording').disabled = false;
 };
 
 // convert bytes to megabytes/etc http://goo.gl/B3ae8c
