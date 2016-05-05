@@ -8,25 +8,30 @@ Note: Must be called before webrtc.js
 
 */
 
-var media_recorder;
+var media_recorder = [];
 var time_interval = 5000; // time of each audio segment in milliseconds.
 var index = 1;
 var recording = false; // Am I recording yet?
 
+var recordingStreams = 0;
+
 function record_handle(stream) {
 	// Create new MediaSteamRecorder from media-stream-record.js
-	media_recorder = new MediaStreamRecorder(stream);
+	media_recorder[recordingStreams] = new MediaStreamRecorder(stream);
+    recordingStreams++;
+    
+    var recorderTemp = media_recorder[recordingStreams];
 	// Save in .ogg file format
-	media_recorder.mimeType = 'audio/ogg';
+	recorderTemp.mimeType = 'audio/ogg';
 	// Set the stream
-	media_recorder.stream = stream;
-    media_recorder.audioChannels = 1;
+	recorderTemp.stream = stream;
+    recorderTemp.audioChannels = 1;
     
     
 	//media_recorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
-	media_recorder.ondataavailable = function(blob) {
+	recorderTemp.ondataavailable = function(blob) {
 		var audios_container = document.getElementById('audios-container');
 		var a = document.createElement('a');
 		a.target = '_blank';
@@ -39,7 +44,9 @@ function record_handle(stream) {
 	};
 
 	// get blob after specific time interval
-	media_recorder.start(time_interval);
+	recorderTemp.start(time_interval);
+    
+    media_recorder[recordingStreams] = recorderTemp;
 
 	document.getElementById('stop-recording').disabled = false;
 	document.getElementById('pause-recording').disabled = false;

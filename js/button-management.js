@@ -23,19 +23,21 @@ document.getElementById('start-recording').onclick = function() {
     // probably in some sort of loop?
     
     var mainStream = easyrtc.getLocalStream();
-    //record_handle(mainStream);
+    record_handle(mainStream);
     for (var i = 0; i < peers.length; i++) {        
         var user = peers[i];
         //mainStream.addTrack(user);
-        //record_handle(user);
+        record_handle(user);
     }
-    record_handle(mainStream);
+    //record_handle(mainStream);
 };
 
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
-	media_recorder.stop();
-	media_recorder.stream.stop();
+    for (var i = 0; i < recordingStreams; i++) {
+        media_recorder[i].stop();
+        media_recorder[i].stream.stop();
+    }
 	document.getElementById('pause-recording').disabled = true;
 	document.getElementById('start-recording').disabled = false;
 	recording = false; // I have stopped recording
@@ -43,17 +45,23 @@ document.getElementById('stop-recording').onclick = function() {
 
 document.getElementById('pause-recording').onclick = function() {
 	this.disabled = true;
-	media_recorder.pause();
+    for (var i = 0; i < recordingStreams; i++) {
+        media_recorder[i].pause();
+    }
 	document.getElementById('resume-recording').disabled = false;
 };
 
 document.getElementById('resume-recording').onclick = function() {
 	this.disabled = true;
-	media_recorder.resume();
+    for (var i = 0; i < recordingStreams; i++) {
+        media_recorder[i].resume();
+    }
 	document.getElementById('pause-recording').disabled = false;
 };
 
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
-	media_recorder.save();
+    for (var i = 0; i < recordingStreams; i++) {
+        media_recorder[i].save();
+    }
 };
