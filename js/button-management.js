@@ -7,7 +7,7 @@ Use: Any HTML buttons that depend on JS are defined in here.
 Note: Must be called after HTML button has been rendered in DOM - so include at the bottom of room.php
 
 */
-
+var records_saved = 0;
 // Don't let them start recording if page is about to be unloaded
 // This is mostly useless afaik
 window.onbeforeunload = function() {
@@ -34,11 +34,14 @@ document.getElementById('start-recording').onclick = function() {
     document.getElementById('stop-recording').disabled = false;
 	//document.getElementById('pause-recording').disabled = false;
 	//document.getElementById('save-recording').disabled = false;
+    if (records_saved == 1) {
+        document.getElementById('stop-recording').innerHTML = "<Don't Expect Results>";
+    }
 };
 
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
-    for (var i = 0; i < recordingStreams; i++) {
+    for (var i = 0; i < recording_streams; i++) {
         media_recorder[i].stop();
         media_recorder[i].stream.stop();
     }
@@ -46,11 +49,14 @@ document.getElementById('stop-recording').onclick = function() {
 	//document.getElementById('start-recording').disabled = false;
     document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
+    if (records_saved == 1) {
+        document.getElementById('save-recording').innerHTML = "<Have fun with your duplicate file>";
+    }
 };
 /* TEMP: Pause and resume buttons removed
 document.getElementById('pause-recording').onclick = function() {
 	this.disabled = true;
-    for (var i = 0; i < recordingStreams; i++) {
+    for (var i = 0; i < recording_streams; i++) {
         media_recorder[i].pause();
     }
 	document.getElementById('resume-recording').disabled = false;
@@ -58,7 +64,7 @@ document.getElementById('pause-recording').onclick = function() {
 
 document.getElementById('resume-recording').onclick = function() {
 	this.disabled = true;
-    for (var i = 0; i < recordingStreams; i++) {
+    for (var i = 0; i < recording_streams; i++) {
         media_recorder[i].resume();
     }
 	document.getElementById('pause-recording').disabled = false;
@@ -66,9 +72,10 @@ document.getElementById('resume-recording').onclick = function() {
 
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
-    for (var i = 0; i < recordingStreams; i++) {
+    for (var i = 0; i < recording_streams; i++) {
         media_recorder[i].save();
     }
     document.getElementById('start-recording').disabled = false;
-    document.getElementById('start-recording').value = "<Broken?>";
+    document.getElementById('start-recording').innerHTML = "<Broken>";
+    records_saved = 1;
 };
