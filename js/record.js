@@ -18,7 +18,6 @@ var recordingStreams = 0;
 function record_handle(stream) {
 	// Create new MediaSteamRecorder from media-stream-record.js
 	media_recorder[recordingStreams] = new MediaStreamRecorder(stream);
-    recordingStreams++;
     
     var recorderTemp = media_recorder[recordingStreams];
 	// Save in .ogg file format
@@ -26,7 +25,6 @@ function record_handle(stream) {
 	// Set the stream
 	recorderTemp.stream = stream;
     recorderTemp.audioChannels = 1;
-    
     
 	//media_recorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
 
@@ -47,6 +45,7 @@ function record_handle(stream) {
 	recorderTemp.start(time_interval);
     
     media_recorder[recordingStreams] = recorderTemp;
+    recordingStreams++;
 
 	document.getElementById('stop-recording').disabled = false;
 	document.getElementById('pause-recording').disabled = false;
