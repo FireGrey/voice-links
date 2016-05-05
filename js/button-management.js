@@ -30,6 +30,15 @@ document.getElementById('start-recording').onclick = function() {
         record_handle(user);
     }
     //record_handle(mainStream);
+    
+    document.getElementById('stop-recording').disabled = false;
+	//document.getElementById('pause-recording').disabled = false;
+	//document.getElementById('save-recording').disabled = false;
+    
+    // TEMP: Removed the following elements because they mess with the application 
+    // and don't provide much functionality anyway
+    document.getElementById('pause-recording').visible = false;
+    document.getElementById('resume-recording').visible = false;
 };
 
 document.getElementById('stop-recording').onclick = function() {
@@ -38,8 +47,9 @@ document.getElementById('stop-recording').onclick = function() {
         media_recorder[i].stop();
         media_recorder[i].stream.stop();
     }
-	document.getElementById('pause-recording').disabled = true;
-	document.getElementById('start-recording').disabled = false;
+	//document.getElementById('pause-recording').disabled = true;
+	//document.getElementById('start-recording').disabled = false;
+    document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
 };
 
@@ -64,4 +74,6 @@ document.getElementById('save-recording').onclick = function() {
     for (var i = 0; i < recordingStreams; i++) {
         media_recorder[i].save();
     }
+    document.getElementById('start-recording').disabled = false;
+    document.getElementById('start-recording').value = "<Broken?>";
 };

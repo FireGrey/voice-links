@@ -87,6 +87,7 @@ $room_name = htmlentities($_GET['slug']);
 
 					<!-- EXPERIMENT -->
 					<div id="audios-container"></div>
+                    <!-- END EXPERIMENT -->
 				</header>
 			</section>
 

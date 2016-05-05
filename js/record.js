@@ -46,10 +46,6 @@ function record_handle(stream) {
     
     media_recorder[recordingStreams] = recorderTemp;
     recordingStreams++;
-
-	document.getElementById('stop-recording').disabled = false;
-	document.getElementById('pause-recording').disabled = false;
-	document.getElementById('save-recording').disabled = false;
 }
 
 // convert bytes to megabytes/etc http://goo.gl/B3ae8c
