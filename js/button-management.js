@@ -35,7 +35,7 @@ document.getElementById('start-recording').onclick = function() {
 	//document.getElementById('pause-recording').disabled = false;
 	//document.getElementById('save-recording').disabled = false;
     if (records_saved == 1) {
-        document.getElementById('stop-recording').innerHTML = "<Don't Expect Results>";
+        document.getElementById('stop-recording').innerHTML = "Don't Expect Results";
     }
 };
 
@@ -50,7 +50,7 @@ document.getElementById('stop-recording').onclick = function() {
     document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
     if (records_saved == 1) {
-        document.getElementById('save-recording').innerHTML = "<Have fun with your duplicate file>";
+        document.getElementById('save-recording').innerHTML = "Have fun with your duplicate file";
     }
 };
 /* TEMP: Pause and resume buttons removed
@@ -76,6 +76,6 @@ document.getElementById('save-recording').onclick = function() {
         media_recorder[i].save();
     }
     document.getElementById('start-recording').disabled = false;
-    document.getElementById('start-recording').innerHTML = "<Broken>";
+    document.getElementById('start-recording').innerHTML = "Broken";
     records_saved = 1;
 };
