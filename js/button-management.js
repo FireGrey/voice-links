@@ -47,7 +47,7 @@ document.getElementById('stop-recording').onclick = function() {
     document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
 };
-
+/* TEMP: Pause and resume buttons removed
 document.getElementById('pause-recording').onclick = function() {
 	this.disabled = true;
     for (var i = 0; i < recordingStreams; i++) {
@@ -62,7 +62,7 @@ document.getElementById('resume-recording').onclick = function() {
         media_recorder[i].resume();
     }
 	document.getElementById('pause-recording').disabled = false;
-};
+};*/
 
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
