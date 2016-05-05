@@ -23,14 +23,13 @@ document.getElementById('start-recording').onclick = function() {
     // probably in some sort of loop?
     
     var mainStream = easyrtc.getLocalStream();
-    record_handle(mainStream);
-    for (var i = 0; i < peers.length; i++) {
-        //blobURL = document.getElementById(user).src;
-        //mainStream.addTrack(blobURL);
-        //var newTrack = 
+    //record_handle(mainStream);
+    for (var i = 0; i < peers.length; i++) {        
         var user = peers[i];
-        record_handle(user);
+        mainStream.addTrack(user);
+        //record_handle(user);
     }
+    record_handle(mainStream);
 };
 
 document.getElementById('stop-recording').onclick = function() {
