@@ -24,10 +24,11 @@ document.getElementById('start-recording').onclick = function() {
     
     var mainStream = easyrtc.getLocalStream();
     record_handle(mainStream);
-    for (var user in peers) {
+    for (var i = 0; i < peers.length; i++) {
         //blobURL = document.getElementById(user).src;
         //mainStream.addTrack(blobURL);
         //var newTrack = 
+        var user = peers[i];
         record_handle(user);
     }
 };
