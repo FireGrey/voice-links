@@ -50,7 +50,7 @@ document.getElementById('stop-recording').onclick = function() {
     document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
     if (records_saved == 1) {
-        document.getElementById('save-recording').innerHTML = "Have fun with your duplicate file";
+        document.getElementById('save-recording').innerHTML = "Have fun with your duplicate files";
     }
 };
 /* TEMP: Pause and resume buttons removed
