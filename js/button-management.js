@@ -19,8 +19,10 @@ document.getElementById('start-recording').onclick = function() {
 	recording = true; // I am recording!
 	// Get streams from easyRTC
 	// Just getting our local stream atm to debug
-	// Ultimately this will need to get all the current streams from easyrtc and record them all probably in some sort of loop?
+	// Ultimately this will need to get all the current streams from easyrtc and record them all,
+    // probably in some sort of loop?
 	record_handle(easyrtc.getLocalStream());
+    recordAllPeers();
 };
 
 document.getElementById('stop-recording').onclick = function() {
