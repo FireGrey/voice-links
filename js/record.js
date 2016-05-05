@@ -20,6 +20,9 @@ function record_handle(stream) {
 	media_recorder.mimeType = 'audio/ogg';
 	// Set the stream
 	media_recorder.stream = stream;
+    media_recorder.audioChannels = 1;
+    
+    
 	//media_recorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available

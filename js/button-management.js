@@ -26,7 +26,7 @@ document.getElementById('start-recording').onclick = function() {
     //record_handle(mainStream);
     for (var i = 0; i < peers.length; i++) {        
         var user = peers[i];
-        mainStream.addTrack(user);
+        //mainStream.addTrack(user);
         //record_handle(user);
     }
     record_handle(mainStream);
