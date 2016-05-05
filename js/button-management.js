@@ -21,8 +21,17 @@ document.getElementById('start-recording').onclick = function() {
 	// Just getting our local stream atm to debug
 	// Ultimately this will need to get all the current streams from easyrtc and record them all,
     // probably in some sort of loop?
-	record_handle(easyrtc.getLocalStream());
-    recordAllPeers();
+    var mainStream = easyrtc.getLocalStream();
+    
+    for (var user in peers) {
+        blobURL = document.getElementById(user).src;
+        mainStream.addTrack(blobURL);
+        //var newTrack = 
+        //record_handle(mediaStream);
+    }
+
+	record_handle(mainStream);
+    //recordAllPeers();
 };
 
 document.getElementById('stop-recording').onclick = function() {

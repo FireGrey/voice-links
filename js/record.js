@@ -43,13 +43,6 @@ function record_handle(stream) {
 	document.getElementById('save-recording').disabled = false;
 }
 
-function recordAllPeers() {
-    for (var user in peers) {
-        mediaStream = document.getElementById(user).src;
-        record_handle(mediaStream);
-    }
-}
-
 // convert bytes to megabytes/etc http://goo.gl/B3ae8c
 function neaten_bytes(bytes) {
 	var k = 1000;
