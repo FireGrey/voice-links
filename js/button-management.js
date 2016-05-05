@@ -37,8 +37,8 @@ document.getElementById('start-recording').onclick = function() {
     
     // TEMP: Removed the following elements because they mess with the application 
     // and don't provide much functionality anyway
-    document.getElementById('pause-recording').visible = false;
-    document.getElementById('resume-recording').visible = false;
+    document.getElementById('pause-recording').style.display = 'none';
+    document.getElementById('resume-recording').style.display = 'none';
 };
 
 document.getElementById('stop-recording').onclick = function() {
