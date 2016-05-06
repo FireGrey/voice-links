@@ -1,3 +1,4 @@
+// Edited for Voice Links - See comments starting with 'VL'
 // Last time updated: 2016-04-15 12:50:55 PM UTC
 
 // links:
@@ -105,7 +106,7 @@ function MediaStreamRecorder(mediaStream) {
                 type: mediaRecorder.blobs[0].type || this.mimeType
             });
 
-            invokeSaveAsDialog(bigBlob);
+            invokeSaveAsDialog(bigBlob, fileName); // VL: Added fileName param
             return;
         }
         invokeSaveAsDialog(file, fileName);
