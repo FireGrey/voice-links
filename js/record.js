@@ -9,7 +9,9 @@ Note: Must be called before webrtc.js
 */
 
 // Array of all media recorder Objects
-var media_recorder = [];
+//[n][0] == easyrtcid String
+//[n][1] == MediaStreamRecorder Object
+var current_recordings = [];
 
 var time_interval = 5000; // time of each audio segment in milliseconds.
 var index = 1;
@@ -51,8 +53,8 @@ function record_handle(stream, filename) {
 
 	// get blob after specific time interval
 	recorder_temp.start(time_interval);
-	
-	media_recorder.push([filename, recorder_temp]);
+	//Add thenew recorder to the array
+	current_recordings.push([filename, recorder_temp]);
 	num_recording_streams++;
 }
 

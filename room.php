@@ -70,9 +70,6 @@ $room_name = htmlentities($_GET['slug']);
 					<h1>Recording Options:</h1>
 					<button id="start-recording">Start</button>
 					<button id="stop-recording" disabled>Stop</button>
-					<!-- TEMP: Removed pause and resume buttons
-                    <button id="pause-recording" disabled>Pause</button>
-					<button id="resume-recording" disabled>Resume</button>-->
 					<button id="save-recording" disabled>Save</button>
 					
 					<h1>Conference Members:</h1>
@@ -88,7 +85,7 @@ $room_name = htmlentities($_GET['slug']);
 
 					<!-- EXPERIMENT -->
 					<div id="audios-container"></div>
-                    <!-- END EXPERIMENT -->
+					<!-- END EXPERIMENT -->
 				</header>
 			</section>
 

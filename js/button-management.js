@@ -39,8 +39,8 @@ document.getElementById('start-recording').onclick = function() {
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
     for (var i = 0; i < num_recording_streams; i++) {
-        media_recorder[i][1].stop();
-        media_recorder[i][1].stream.stop();
+        current_recordings[i][1].stop();
+        current_recordings[i][1].stream.stop();
     }
 	document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
@@ -53,8 +53,8 @@ document.getElementById('stop-recording').onclick = function() {
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	for (var i = 0; i < num_recording_streams; i++) {
-		// parse filename into here
-		media_recorder[i][1].save(null, media_recorder[i][0]);
+	var filename = current_recordings[i][0];
+		current_recordings[i][1].save(null, filename);
 	}
 	document.getElementById('start-recording').disabled = false;
 	//Warning about multiple recordings
