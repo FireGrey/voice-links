@@ -26,10 +26,9 @@ function record_handle(stream, filename) {
 		// filename is users easyrctid - just need to know where to get it from...
 		var filename = filename;
 	}
-	// Create new MediaSteamRecorder from media-stream-record.js
-	media_recorder[num_recording_streams] = new MediaStreamRecorder(stream);
 	
-	var recorder_temp = media_recorder[num_recording_streams];
+	//Create temporary MediaRecorder object from media-stream-record.js to push to array later
+	var recorder_temp = new MediaStreamRecorder(stream);
 	// Save in .ogg file format
 	recorder_temp.mimeType = 'audio/ogg';
 	// Set the stream
@@ -53,7 +52,7 @@ function record_handle(stream, filename) {
 	// get blob after specific time interval
 	recorder_temp.start(time_interval);
 	
-	media_recorder[num_recording_streams] = recorder_temp;
+	media_recorder.push([filename, recorder_temp]);
 	num_recording_streams++;
 }
 

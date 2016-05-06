@@ -54,7 +54,7 @@ document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	for (var i = 0; i < num_recording_streams; i++) {
 		// parse filename into here
-		media_recorder[i].save(null, filename);
+		media_recorder[i][1].save(null, media_recorder[i][0]);
 	}
 	document.getElementById('start-recording').disabled = false;
 	//Warning about multiple recordings
