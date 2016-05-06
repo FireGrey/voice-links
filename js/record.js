@@ -21,12 +21,6 @@ var recording = false; // Am I recording yet?
 var num_recording_streams = 0;
 
 function record_handle(stream, filename) {
-	if (!filename) {
-		// totally not important
-	} else {
-		// totally not important
-	}
-	
 	//Create temporary MediaRecorder object from media-stream-record.js to push to array later
 	var recorder_temp = new MediaStreamRecorder(stream);
 	// Save in .ogg file format
