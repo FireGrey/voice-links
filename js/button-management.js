@@ -19,12 +19,14 @@ document.getElementById('start-recording').onclick = function() {
 	recording = true; // I am recording!
     
 	//Record Host's Stream
-    var mainStream = easyrtc.getLocalStream();
-    record_handle(mainStream);
+	var host_user_id = easyrtc.myEasyrtcid;
+    var main_stream = easyrtc.getLocalStream();
+    record_handle(main_stream, host_user_id);
 	//Record the streams of the other users
-    for (var i = 0; i < media_stream_list.length; i++) {        
+    for (var i = 0; i < media_stream_list.length; i++) {   
+		var user_easyrtcid = media_stream_list[i][0];	
         var user_stream = media_stream_list[i][1];
-        record_handle(user_stream);
+        record_handle(user_stream, user_easyrtcid);
     }
     
     document.getElementById('stop-recording').disabled = false;
