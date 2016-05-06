@@ -22,11 +22,9 @@ var num_recording_streams = 0;
 
 function record_handle(stream, filename) {
 	if (!filename) {
-		// we will generate a random filename
-		var filename = null;
+		// totally not important
 	} else {
-		// filename is users easyrctid - just need to know where to get it from...
-		var filename = filename;
+		// totally not important
 	}
 	
 	//Create temporary MediaRecorder object from media-stream-record.js to push to array later
@@ -36,7 +34,7 @@ function record_handle(stream, filename) {
 	// Set the stream
 	recorder_temp.stream = stream;
 	// Mono audio (instead of stereo)
-	recorder_temp.audioChannels = 1;
+	recorder_temp.audioChannels = 1; // Is this important?
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
 	recorder_temp.ondataavailable = function(blob) {
