@@ -53,8 +53,7 @@ document.getElementById('stop-recording').onclick = function() {
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	for (var i = 0; i < num_recording_streams; i++) {
-	var filename = current_recordings[i][0];
-		current_recordings[i][1].save(null, filename);
+        current_recordings[i][1].save(null, current_recordings[i][0]);
 	}
 	document.getElementById('start-recording').disabled = false;
 	//Warning about multiple recordings
