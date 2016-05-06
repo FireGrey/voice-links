@@ -39,8 +39,8 @@ document.getElementById('start-recording').onclick = function() {
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
     for (var i = 0; i < num_recording_streams; i++) {
-        media_recorder[i].stop();
-        media_recorder[i].stream.stop();
+        media_recorder[i][1].stop();
+        media_recorder[i][1].stream.stop();
     }
 	document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
