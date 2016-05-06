@@ -73,7 +73,8 @@ document.getElementById('resume-recording').onclick = function() {
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
     for (var i = 0; i < recording_streams; i++) {
-        media_recorder[i].save();
+        // parse filename into here
+        media_recorder[i].save(null, filename);
     }
     document.getElementById('start-recording').disabled = false;
     document.getElementById('start-recording').innerHTML = "Broken";

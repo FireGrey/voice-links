@@ -15,7 +15,14 @@ var recording = false; // Am I recording yet?
 
 var recording_streams = 0;
 
-function record_handle(stream) {
+function record_handle(stream, filename) {
+	if (!filename) {
+		// we will generate a random filename
+		var filename = null;
+	} else {
+		// filename is users easyrctid - just need to know where to get it from...
+		var filename = filename;
+	}
 	// Create new MediaSteamRecorder from media-stream-record.js
 	media_recorder[recording_streams] = new MediaStreamRecorder(stream);
     
