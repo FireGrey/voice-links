@@ -8,12 +8,15 @@ Note: Must be called before webrtc.js
 
 */
 
+// Array of all media recorder Objects
 var media_recorder = [];
+
 var time_interval = 5000; // time of each audio segment in milliseconds.
 var index = 1;
 var recording = false; // Am I recording yet?
 
-var recording_streams = 0;
+// Amount of streams that are currently being recorded (minus 1)
+var num_recording_streams = 0;
 
 function record_handle(stream, filename) {
 	if (!filename) {
@@ -24,16 +27,15 @@ function record_handle(stream, filename) {
 		var filename = filename;
 	}
 	// Create new MediaSteamRecorder from media-stream-record.js
-	media_recorder[recording_streams] = new MediaStreamRecorder(stream);
-    
-    var recorder_temp = media_recorder[recording_streams];
+	media_recorder[num_recording_streams] = new MediaStreamRecorder(stream);
+	
+	var recorder_temp = media_recorder[num_recording_streams];
 	// Save in .ogg file format
 	recorder_temp.mimeType = 'audio/ogg';
 	// Set the stream
 	recorder_temp.stream = stream;
-    recorder_temp.audioChannels = 1;
-    
-	//media_recorder.audioChannels = !!document.getElementById('left-channel').checked ? 1 : 2;
+	// Mono audio (instead of stereo)
+	recorder_temp.audioChannels = 1;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
 	recorder_temp.ondataavailable = function(blob) {
@@ -50,9 +52,9 @@ function record_handle(stream, filename) {
 
 	// get blob after specific time interval
 	recorder_temp.start(time_interval);
-    
-    media_recorder[recording_streams] = recorder_temp;
-    recording_streams++;
+	
+	media_recorder[num_recording_streams] = recorder_temp;
+	num_recording_streams++;
 }
 
 // convert bytes to megabytes/etc http://goo.gl/B3ae8c

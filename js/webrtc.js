@@ -1,7 +1,10 @@
 // new users must call everyone else
 var called_before = false; // is this a new user? - false means they haven't called everyone yet
 
-var peers = [];
+//Array to hold all the MediaStream objects from each user
+//[n][0] == easyrtcid String
+//[n][1] == MediaStream Object
+var media_stream_list = [][];
 
 function roomListener(roomName, otherPeers) {
 	var otherClientDiv = document.getElementById('other-clients');
@@ -103,7 +106,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 }
 
 easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
-    peers.push(stream);
+	media_stream_list.push([callerEasyrtcid, stream]);
 	// create a name tag
 	var user_box = document.getElementById('client-list');
 	var list_item = document.createElement('li');
