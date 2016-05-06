@@ -4,7 +4,7 @@ var called_before = false; // is this a new user? - false means they haven't cal
 //Array to hold all the MediaStream objects from each user
 //[n][0] == easyrtcid String
 //[n][1] == MediaStream Object
-var media_stream_list = [[],[]];
+var media_stream_list = [];
 
 function roomListener(roomName, otherPeers) {
 	var otherClientDiv = document.getElementById('other-clients');
