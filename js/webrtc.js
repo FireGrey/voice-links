@@ -143,8 +143,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// Object has been created, check if I am recording
 	if(recording) {
 		// If so, add new stream to the record
-		begin_record(stream); 	// this more than likely doesn't work but the idea is there
-								// we need to watch for new comers and add their stream if a client is currently recording
+		record_handle(stream, callerEasyrtcid);
 	}
 });
 
