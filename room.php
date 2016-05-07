@@ -44,39 +44,48 @@ $room_name = htmlentities($_GET['slug']);
 
 		<script src="//<?php echo HOST; ?>:8080/socket.io/socket.io.js"></script>
 		<script src="//<?php echo HOST; ?>:8080/easyrtc/easyrtc.js"></script>
-		<!-- We add a version to this request to stop the browser caching an old version when we update it -->
-		<script src="//<?php echo HOST; ?>/js/webrtc.js?v=test-<?php echo rand(1000,100000); ?>"></script>
+		<script src="//<?php echo HOST; ?>/js/media-stream-record.js"></script> <!-- Record Dependancies -->
 	</head>
 
 	<body onload="my_init('<?php echo $room_name; ?>')">
 		<!-- Wrapper -->
 		<div id="wrapper">
-            <div id="wrapper" style="max-height:300px">
-                <table>
-                    <tr>
-                        <td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
-                        <td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
-                    </tr>
-                </table>
-
-                <!-- Main -->
-                <p>Send this link to others to allow them to join the conference:</p>
-                <form>
-                    <input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
-                </form>
-            </div>
+			<div id="wrapper" style="max-height:300px">
+				<table>
+					<tr>
+						<td><img src="//<?php echo HOST; ?>/images/connection-color.png" style="height: 150px;"></td>
+						<td><img src="//<?php echo HOST; ?>/images/logo.png" style="height: 150px;"></td>
+					</tr>
+				</table>
+				<!-- Main -->
+				<p>Send this link to others to allow them to join the conference:</p>
+				<form>
+					<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
+				</form>
+			</div>
 			
 			<section id="main" style="width:80%">
 				<header>
-					<h1>Users Currently in this conference:</h1>
-						<div id="other-clients"> </div><br>
-						<!-- Our box -->
-						<video id="self" width="1" height="1" style="display:none"></video>
-						<div id="client-box">
-                            <ul id="client-list" class="users">
-                                <!-- New clients get a box in here -->
-                            </ul>
-						</div>
+					<!-- Recording Controls -->
+					<h1>Recording Options:</h1>
+					<button id="start-recording">Start</button>
+					<button id="stop-recording" disabled>Stop</button>
+					<button id="save-recording" disabled>Save</button>
+					
+					<h1>Conference Members:</h1>
+					<div id="other-clients"> </div><br>
+					<!-- Our box -->
+					<video id="self" width="1" height="1" style="display:none"></video>
+
+					<div id="client-box">
+						<ul id="client-list" class="users">
+							<!-- New clients get a box in here -->
+						</ul>
+					</div>
+
+					<!-- EXPERIMENT -->
+					<div id="audios-container"></div>
+					<!-- END EXPERIMENT -->
 				</header>
 			</section>
 
@@ -90,4 +99,9 @@ $room_name = htmlentities($_GET['slug']);
 			</footer>
 		</div> <!-- Close wrapper -->
 	</body>
+	<!-- The order of these is likely very important -->
+	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
+	<!-- We add a version to these requests to stop the browser caching old versions of rapidly updating files -->
+	<script src="//<?php echo HOST; ?>/js/record.js?v=t<?php echo rand(1000,100000); ?>"></script>
+	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=t<?php echo rand(1000,100000); ?>"></script>
 </html>
