@@ -39,15 +39,16 @@ function record_handle(stream, filename, record_timestamp) {
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
 	recorder_temp.ondataavailable = function(blob) {
-		var audios_container = document.getElementById('audios-container');
-		var a = document.createElement('a');
-		a.target = '_blank';
-		a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + neaten_bytes(blob.size) + ') Time Length: ' + neaten_time(time_interval);
+		// not required vvv
+		// var audios_container = document.getElementById('audios-container');
+		// var a = document.createElement('a');
+		// a.target = '_blank';
+		// a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + neaten_bytes(blob.size) + ') Time Length: ' + neaten_time(time_interval);
 
-		a.href = URL.createObjectURL(blob);
+		// a.href = URL.createObjectURL(blob);
 
-		audios_container.appendChild(a);
-		audios_container.appendChild(document.createElement('hr'));
+		// audios_container.appendChild(a);
+		// audios_container.appendChild(document.createElement('hr'));
 	};
 
 	// get blob after specific time interval
