@@ -124,22 +124,79 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// create controls for them
 	var table_row_2 = document.createElement('tr');
 	var table_cell_2 = document.createElement('td');
+    var table_row_3 = document.createElement('tr');
+    var table_cell_3 = document.createElement('td');
 	var video = document.createElement('video');
 	video.setAttribute('id', callerEasyrtcid);
 	video.setAttribute('width', '300');
 	video.setAttribute('height', '30');
 	video.setAttribute('controls', 'controls');
+    var selector = document.createElement('select');
+    selector.setAttribute('class', 'outputSelector');
 
 	table_cell_2.appendChild(video);
 	table_row_2.appendChild(table_cell_2);
-
+    table_cell_3.appendChild(selector);
+    table_row_3.appendChild(table_cell_3);
+    
 	table.appendChild(table_row_1);
 	table.appendChild(table_row_2);
+    table.appendChild(table_row_3);
 	list_item.appendChild(table);
 	user_box.appendChild(list_item);
 
 	easyrtc.setVideoObjectSrc(video, stream);
+    
+    function attachSinkId(element, sinkId, outputSelector) {
+        if (typeof element.sinkId !== 'undefined') {
+            element.setSinkId(sinkId)
+            .then(function() {
+                console.log('Success, audio output device attached: ' + sinkId + ' to ' +
+                'element with ' + element.title + ' as source.');
+            })
+            .catch(function(error) {
+                var errorMessage = error;
+                if (error.name === 'SecurityError') {
+                    errorMessage = 'You need to use HTTPS for selecting audio output ' +
+                    'device: ' + error;
+                }
+                console.error(errorMessage);
+                // Jump back to first output device in the list as it's the default.
+                outputSelector.selectedIndex = 0;
+            });
+        } else {
+            console.warn('Browser does not support output device selection.');
+        }
+    }
+    
+    function changeAudioDestination(event) {
+        var deviceId = event.target.value;
+        var outputSelector = event.target;
 
+        attachSinkId(video, deviceId, outputSelector);
+    }
+    
+    function gotDevices(deviceInfos) {
+        for (var i = 0; i !== deviceInfos.length; ++i) {
+            var deviceInfo = deviceInfos[i];
+            var option = document.createElement('option');
+            option.value = deviceInfo.deviceId;
+            if (deviceInfo.kind === 'audiooutput') {
+                console.info('Found audio output device: ', deviceInfo.label);
+                option.text = deviceInfo.label || 'speaker ' +
+                    (masterOutputSelector.length + 1);
+                selector.appendChild(option);
+            } else {
+                console.log('Found non audio output device: ', deviceInfo.label);
+            }
+        }
+        selector.addEventListener('change', changeAudioDestination);
+    }
+    
+    navigator.mediaDevices.enumerateDevices()
+    .then(gotDevices)
+    .catch(errorCallback);
+    
 	// Object has been created, check if I am recording
 	if(recording) {
 		// If so, add new stream to the record
