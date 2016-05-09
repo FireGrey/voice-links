@@ -11,6 +11,7 @@ Note: Must be called before webrtc.js
 // Array of all media recorder Objects
 //[n][0] == easyrtcid String
 //[n][1] == MediaStreamRecorder Object
+//[n][2] == timestamp in milliseconds when record begins
 var current_recordings = [];
 
 var time_interval = 5000; // time of each audio segment in milliseconds.
@@ -20,7 +21,13 @@ var recording = false; // Am I recording yet?
 // Amount of streams that are currently being recorded (minus 1)
 var num_recording_streams = 0;
 
-function record_handle(stream, filename) {
+function record_handle(stream, filename, record_timestamp) {
+	// check if offset is set
+	if (typeof record_timestamp == 'undefined') {
+		// if 'record_timestamp' is undefined it means user was already in channel when recording begun
+		// therefore they have no offset and hense record_timestamp == 0;
+		record_timestamp = '0';
+	}
 	//Create temporary MediaRecorder object from media-stream-record.js to push to array later
 	var recorder_temp = new MediaStreamRecorder(stream);
 	// Save in .ogg file format
@@ -32,21 +39,23 @@ function record_handle(stream, filename) {
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
 	recorder_temp.ondataavailable = function(blob) {
-		var audios_container = document.getElementById('audios-container');
-		var a = document.createElement('a');
-		a.target = '_blank';
-		a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + neaten_bytes(blob.size) + ') Time Length: ' + neaten_time(time_interval);
+		// this was really only for testing tbh....
 
-		a.href = URL.createObjectURL(blob);
+		// var audios_container = document.getElementById('audios-container');
+		// var a = document.createElement('a');
+		// a.target = '_blank';
+		// a.innerHTML = 'Open Recorded Audio No. ' + (index++) + ' (Size: ' + neaten_bytes(blob.size) + ') Time Length: ' + neaten_time(time_interval);
 
-		audios_container.appendChild(a);
-		audios_container.appendChild(document.createElement('hr'));
+		// a.href = URL.createObjectURL(blob);
+
+		// audios_container.appendChild(a);
+		// audios_container.appendChild(document.createElement('hr'));
 	};
 
 	// get blob after specific time interval
 	recorder_temp.start(time_interval);
-	//Add thenew recorder to the array
-	current_recordings.push([filename, recorder_temp]);
+	//Add the new recorder to the array
+	current_recordings.push([filename, recorder_temp, record_timestamp]);
 	num_recording_streams++;
 }
 

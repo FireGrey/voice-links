@@ -34,6 +34,9 @@ document.getElementById('start-recording').onclick = function() {
     if (files_saved == 1) {
         document.getElementById('stop-recording').innerHTML = "Don't Expect Results";
     }
+
+    // Get timestamp to calulate offset of new remote peers
+    var begin_record_timestamp = Date.now();
 };
 
 document.getElementById('stop-recording').onclick = function() {
@@ -53,7 +56,16 @@ document.getElementById('stop-recording').onclick = function() {
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	for (var i = 0; i < num_recording_streams; i++) {
-        current_recordings[i][1].save(null, current_recordings[i][0]);
+		// calcualte offset for peers in milliseconds if osset exists
+		if (current_recordings[i][2] != '0') {
+			var offset = current_recordings[i][2] - begin_record_timestamp;
+		} else {
+			var offset = current_recordings[i][2];
+		}
+		// generate filename
+		var save_name = current_recordings[i][0] + "-" + offset;
+		// save file
+        current_recordings[i][1].save(null, save_name);
 	}
 	document.getElementById('start-recording').disabled = false;
 	//Warning about multiple recordings

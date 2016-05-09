@@ -199,8 +199,9 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     
 	// Object has been created, check if I am recording
 	if(recording) {
-		// If so, add new stream to the record
-		record_handle(stream, callerEasyrtcid);
+		// I am recording, Add new stream to the record with timestamp so we can calculate the offset later
+		// Fun fact: Date.now() currently suffers from the year 2038 problem.
+		record_handle(stream, callerEasyrtcid, Date.now());
 	}
 });
 

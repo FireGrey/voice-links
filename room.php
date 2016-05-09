@@ -100,8 +100,8 @@ $room_name = htmlentities($_GET['slug']);
 		</div> <!-- Close wrapper -->
 	</body>
 	<!-- The order of these is likely very important -->
-	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<!-- We add a version to these requests to stop the browser caching old versions of rapidly updating files -->
+	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<script src="//<?php echo HOST; ?>/js/record.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=t<?php echo rand(1000,100000); ?>"></script>
 </html>
