@@ -1,6 +1,5 @@
 // new users must call everyone else
 var called_before = false; // is this a new user? - false means they haven't called everyone yet
-
 //Array to hold all the MediaStream objects from each user
 //[n][0] == easyrtcid String
 //[n][1] == MediaStream Object
@@ -105,6 +104,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 	}
 }
 
+// Create visual controls upon accepting a call
 easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	media_stream_list.push([callerEasyrtcid, stream]);
 	// create a name tag
@@ -112,7 +112,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	var list_item = document.createElement('li');
 	list_item.setAttribute('id', 'label-' + callerEasyrtcid);
 	var table = document.createElement('table');
-	table.setAttribute('style', "max-width:100px;"); // Does this line not contridict line 132?
+	table.setAttribute('style', "max-width:100px;"); // Does this line not contridict line 133?
 	var table_row_1 = document.createElement('tr');
 	var table_cell_1 = document.createElement('td');
 
@@ -146,6 +146,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	list_item.appendChild(table);
 	user_box.appendChild(list_item);
 
+	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
     
     function attachSinkId(element, sinkId, outputSelector) {
@@ -196,7 +197,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     
     navigator.mediaDevices.enumerateDevices()
     .then(gotDevices)
-    // causing errors vvv
+    // causing errors in FF vvv
     //.catch(errorCallback);
     
 	// Object has been created, check if I am recording
