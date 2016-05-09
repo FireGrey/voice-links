@@ -196,7 +196,8 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     
     navigator.mediaDevices.enumerateDevices()
     .then(gotDevices)
-    .catch(errorCallback);
+    // causing errors vvv
+    //.catch(errorCallback);
     
 	// Object has been created, check if I am recording
 	if(recording) {
