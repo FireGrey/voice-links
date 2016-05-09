@@ -88,8 +88,8 @@ $room_name = htmlentities($_GET['slug']);
 			<!-- Footer -->
 			<footer id="footer">
 				<ul class="copyright">
-					<li><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/3.0/80x15.png" /></a></li>
 					<li>Voice Links</li>
+					<li><a target="_blank" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width: 0; margin-bottom: -3px" src="https://i.creativecommons.org/l/by/3.0/80x15.png" /></a></li>
 					<li>Design inspired by <a href="http://html5up.net">HTML5 UP</a></li>
 				</ul>
 				<span>Icons made by <a href="http://www.flaticon.com/authors/rami-mcmin" title="Rami McMin">Rami McMin</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></span>
