@@ -112,6 +112,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	var list_item = document.createElement('li');
 	list_item.setAttribute('id', 'label-' + callerEasyrtcid);
 	var table = document.createElement('table');
+	table.setAttribute('style', "max-width:100px;");
 	var table_row_1 = document.createElement('tr');
 	var table_cell_1 = document.createElement('td');
 
