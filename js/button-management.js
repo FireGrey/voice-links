@@ -8,6 +8,7 @@ Note: Must be called after HTML button has been rendered in DOM - so include at 
 
 */
 var files_saved = 0;
+var begin_record_timestamp = '';
 // Don't let them start recording if page is about to be unloaded
 // This is mostly useless afaik
 window.onbeforeunload = function() {
@@ -35,8 +36,8 @@ document.getElementById('start-recording').onclick = function() {
         document.getElementById('stop-recording').innerHTML = "Don't Expect Results";
     }
 
-    // Get timestamp to calulate offset of new remote peers
-    var begin_record_timestamp = Date.now();
+    // Get timestamp to calculate offset of new remote peers
+    begin_record_timestamp = Date.now();
 };
 
 document.getElementById('stop-recording').onclick = function() {
@@ -56,7 +57,7 @@ document.getElementById('stop-recording').onclick = function() {
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
 	for (var i = 0; i < num_recording_streams; i++) {
-		// calcualte offset for peers in milliseconds if osset exists
+		// calcualte offset for peers in milliseconds if offet exists
 		if (current_recordings[i][2] != '0') {
 			var offset = current_recordings[i][2] - begin_record_timestamp;
 		} else {
