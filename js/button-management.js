@@ -47,7 +47,7 @@ document.getElementById('stop-recording').onclick = function() {
 	// stop recording all streams
     for (var i = 0; i < num_recording_streams; i++) {
         current_recordings[i][1].stop();
-        current_recordings[i][1].stream.stop();
+        //current_recordings[i][1].stream.stop();
     }
 
 	document.getElementById('save-recording').disabled = false;
