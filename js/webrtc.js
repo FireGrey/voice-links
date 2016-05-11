@@ -144,16 +144,6 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	list_item.appendChild(table);
 	user_box.appendChild(list_item);
 
-    if(is_chrome) {
-        var selector = document.createElement('select');
-        selector.setAttribute('class', 'output_selector');
-        table_cell_3.appendChild(selector);
-        table_row_3.appendChild(table_cell_3);
-        table.appendChild(table_row_3);
-    } else {
-        console.warn('Output selection only supported by chrome');
-    }
-
 	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
     
@@ -202,9 +192,18 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
         }
         selector.addEventListener('change', change_audio_destination);
     }
+    if(is_chrome) {
+        var selector = document.createElement('select');
+        selector.setAttribute('class', 'output_selector');
+        table_cell_3.appendChild(selector);
+        table_row_3.appendChild(table_cell_3);
+        table.appendChild(table_row_3);
+        navigator.mediaDevices.enumerateDevices()
+        .then(gotDevices)
+    } else {
+        console.warn('Output selection only supported by chrome');
+    }
     
-    navigator.mediaDevices.enumerateDevices()
-    .then(gotDevices)
     // causing errors in FF vvv
     //.catch(errorCallback);
     
