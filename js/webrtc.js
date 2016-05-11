@@ -128,7 +128,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	var table_cell_2 = document.createElement('td');
     var table_row_3 = document.createElement('tr');
     var table_cell_3 = document.createElement('td');
-	var video = document.createElement('video');
+	var video = document.createElement('audio');
 	video.setAttribute('id', callerEasyrtcid);
 	video.setAttribute('width', '300');
 	video.setAttribute('height', '30');
@@ -173,6 +173,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
         var device_id = event.target.value;
         var output_selector = event.target;
         var element = video;
+        
         attach_sink_id(element, device_id, output_selector);
     }
     
