@@ -133,19 +133,26 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	video.setAttribute('width', '300');
 	video.setAttribute('height', '30');
 	video.setAttribute('controls', 'controls');
-    var selector = document.createElement('select');
-    selector.setAttribute('class', 'output_selector');
+    
 
 	table_cell_2.appendChild(video);
 	table_row_2.appendChild(table_cell_2);
-    table_cell_3.appendChild(selector);
-    table_row_3.appendChild(table_cell_3);
-    
+
 	table.appendChild(table_row_1);
 	table.appendChild(table_row_2);
-    table.appendChild(table_row_3);
+    
 	list_item.appendChild(table);
 	user_box.appendChild(list_item);
+
+    if(is_chrome) {
+        var selector = document.createElement('select');
+        selector.setAttribute('class', 'output_selector');
+        table_cell_3.appendChild(selector);
+        table_row_3.appendChild(table_cell_3);
+        table.appendChild(table_row_3);
+    } else {
+        console.warn('Output selection only supported by chrome');
+    }
 
 	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
@@ -200,12 +207,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     .then(gotDevices)
     // causing errors in FF vvv
     //.catch(errorCallback);
-    if (is_chrome == false) {
-        table_row_3.remove();
-        table_cell_3.remove();
-        selector.remove();
-        console.warn('Output selection only supported by chrome');
-    }
+    
 	// Object has been created, check if I am recording
 	if(recording) {
 		// I am recording, Add new stream to the record with timestamp so we can calculate the offset later
