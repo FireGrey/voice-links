@@ -4,6 +4,7 @@ var called_before = false; // is this a new user? - false means they haven't cal
 //[n][0] == easyrtcid String
 //[n][1] == MediaStream Object
 var media_stream_list = [];
+var is_chrome = !!window.chrome;
 
 function roomListener(roomName, otherPeers) {
 	var otherClientDiv = document.getElementById('other-clients');
@@ -199,7 +200,6 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     .then(gotDevices)
     // causing errors in FF vvv
     //.catch(errorCallback);
-    var is_chrome = !!window.chrome;
     if (is_chrome == false) {
         table_row_3.remove();
         table_cell_3.remove();
