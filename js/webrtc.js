@@ -149,11 +149,11 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
     
-    function attachSinkId(element, sinkId, outputSelector) {
+    function attach_sink_id(element, sink_id, output_selector) {
         if (typeof element.sinkId !== 'undefined') {
-            element.setSinkId(sinkId)
+            element.setSinkId(sink_id)
             .then(function() {
-                console.log('Success, audio output device attached: ' + sinkId + ' to ' +
+                console.log('Success, audio output device attached: ' + sink_id + ' to ' +
                 'element with ' + element.title + ' as source.');
             })
             .catch(function(error) {
@@ -164,23 +164,23 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
                 }
                 console.error(errorMessage);
                 // Jump back to first output device in the list as it's the default.
-                outputSelector.selectedIndex = 0;
+                output_selector.selectedIndex = 0;
             });
         } else {
             console.warn('Browser does not support output device selection.');
         }
     }
     
-    function changeAudioDestination(event) {
-        var deviceId = event.target.value;
-        var outputSelector = event.target;
-
-        attachSinkId(video, deviceId, outputSelector);
+    function change_audio_destination(event) {
+        var device_id = event.target.value;
+        var output_selector = event.target;
+        var element = video;
+        attach_sink_id(element, device_id, output_selector);
     }
     
-    function gotDevices(deviceInfos) {
-        for (var i = 0; i !== deviceInfos.length; ++i) {
-            var deviceInfo = deviceInfos[i];
+    function gotDevices(device_infos) {
+        for (var i = 0; i !== device_infos.length; ++i) {
+            var deviceInfo = device_infos[i];
             var option = document.createElement('option');
             option.value = deviceInfo.deviceId;
             if (deviceInfo.kind === 'audiooutput') {
@@ -192,7 +192,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
                 console.log('Found non audio output device: ', deviceInfo.label);
             }
         }
-        selector.addEventListener('change', changeAudioDestination);
+        selector.addEventListener('change', change_audio_destination);
     }
     
     navigator.mediaDevices.enumerateDevices()
