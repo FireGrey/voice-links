@@ -199,8 +199,8 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
     .then(gotDevices)
     // causing errors in FF vvv
     //.catch(errorCallback);
-    var is_chrome = window.chrome;
-    if !(is_chrome) {
+    var is_chrome = !!window.chrome;
+    if (is_chrome == false) {
         table_row_3.remove();
         table_cell_3.remove();
         selector.remove();
