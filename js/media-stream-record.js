@@ -106,9 +106,10 @@ function MediaStreamRecorder(mediaStream) {
 			    var bigBlob = new Blob(mediaRecorder.blobs, {
 			        type: mediaRecorder.blobs[0].type || this.mimeType
 			    });
+				
+				invokeSaveAsDialog(bigBlob, fileName); // VL: Added fileName param
 			}
-
-            invokeSaveAsDialog(bigBlob, fileName); // VL: Added fileName param
+			
             return;
         }
         invokeSaveAsDialog(file, fileName);
