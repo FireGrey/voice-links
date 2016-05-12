@@ -155,12 +155,12 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
                 'element with ' + element.title + ' as source.');
             })
             .catch(function(error) {
-                var errorMessage = error;
+                var error_message = error;
                 if (error.name === 'SecurityError') {
-                    errorMessage = 'You need to use HTTPS for selecting audio output ' +
+                    error_message = 'You need to use HTTPS for selecting audio output ' +
                     'device: ' + error;
                 }
-                console.error(errorMessage);
+                console.error(error_message);
                 // Jump back to first output device in the list as it's the default.
                 output_selector.selectedIndex = 0;
             });
@@ -177,18 +177,18 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
         attach_sink_id(element, device_id, output_selector);
     }
     
-    function gotDevices(device_infos) {
+    function got_devices(device_infos) {
         for (var i = 0; i !== device_infos.length; ++i) {
-            var deviceInfo = device_infos[i];
+            var device_info = device_infos[i];
             var option = document.createElement('option');
-            option.value = deviceInfo.deviceId;
-            if (deviceInfo.kind === 'audiooutput') {
-                console.info('Found audio output device: ', deviceInfo.label);
-                option.text = deviceInfo.label || 'speaker ' +
+            option.value = device_info.deviceId;
+            if (device_info.kind === 'audiooutput') {
+                console.info('Found audio output device: ', device_info.label);
+                option.text = device_info.label || 'speaker ' +
                     (masterOutputSelector.length + 1);
                 selector.appendChild(option);
             } else {
-                console.log('Found non audio output device: ', deviceInfo.label);
+                console.log('Found non audio output device: ', device_info.label);
             }
         }
         selector.addEventListener('change', change_audio_destination);
@@ -200,13 +200,12 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
         table_row_3.appendChild(table_cell_3);
         table.appendChild(table_row_3);
         navigator.mediaDevices.enumerateDevices()
-        .then(gotDevices)
+        .then(got_devices)
     } else {
         console.warn('Output selection only supported by chrome');
     }
     
-    // causing errors in FF vvv
-    //.catch(errorCallback);
+    //.catch(error_callback);
     
 	// Object has been created, check if I am recording
 	if(recording) {
