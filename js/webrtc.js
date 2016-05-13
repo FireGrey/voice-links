@@ -34,16 +34,6 @@ function my_init(roomName) {
 	easyrtc.enableAudio(true);
 	easyrtc.enableVideo(false);
 
-	easyrtc.initMediaSource(
-		function(){
-			// create or join the room connection
-			easyrtc.connect(roomName, connectSuccess, connectFailure);
-		},
-		connectFailure
-	);
-}
-
-function performCall(easyrtcid) {
 	easyrtc.setIceUsedInCalls(
 		{"iceServers": [
 			{"url":"stun:stun:stun.l.google.com:19302"},
@@ -64,6 +54,16 @@ function performCall(easyrtcid) {
 		]}
 	);
 
+	easyrtc.initMediaSource(
+		function(){
+			// create or join the room connection
+			easyrtc.connect(roomName, connectSuccess, connectFailure);
+		},
+		connectFailure
+	);
+}
+
+function performCall(easyrtcid) {
 	easyrtc.call(
 		easyrtcid,
 		function(easyrtcid) { console.log("completed call to " + easyrtcid);},
