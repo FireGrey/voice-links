@@ -19,36 +19,36 @@ window.onbeforeunload = function() {
 document.getElementById('start-recording').onclick = function() {
 	this.disabled = true;
 	recording = true; // I am recording!
-    
+
 	//Record Host's Stream
 	var host_user_id = easyrtc.myEasyrtcid;
-    var main_stream = easyrtc.getLocalStream();
-    record_handle(main_stream, host_user_id);
+	var main_stream = easyrtc.getLocalStream();
+	record_handle(main_stream, host_user_id);
 	//Record the streams of peers
-    for (var i = 0; i < media_stream_list.length; i++) {   
+	for (var i = 0; i < media_stream_list.length; i++) {   
 		var user_easyrtcid = media_stream_list[i][0];	
-        var user_stream = media_stream_list[i][1];
-        record_handle(user_stream, user_easyrtcid);
-    }
-    
-    // enable the ability to stop recording now we have started
-    document.getElementById('stop-recording').disabled = false;
-	//Warning about multiple recordings in one session (without a refresh)
-    if (files_saved == 1) {
-        document.getElementById('stop-recording').innerHTML = "Caution: Out of Scope";
-    }
+		var user_stream = media_stream_list[i][1];
+		record_handle(user_stream, user_easyrtcid);
+	}
 
-    // Get timestamp that recording begins
-    begin_record_timestamp = Date.now();
+	// enable the ability to stop recording now we have started
+	document.getElementById('stop-recording').disabled = false;
+	//Warning about multiple recordings in one session (without a refresh)
+	if (files_saved == 1) {
+		document.getElementById('stop-recording').innerHTML = "Caution: Out of Scope";
+	}
+
+	// Get timestamp that recording begins
+	begin_record_timestamp = Date.now();
 };
 
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
 	// stop recording all streams
-    for (var i = 0; i < num_recording_streams; i++) {
-        current_recordings[i][1].stop();
-        //current_recordings[i][1].stream.stop();
-    }
+	for (var i = 0; i < num_recording_streams; i++) {
+		current_recordings[i][1].stop();
+		//current_recordings[i][1].stream.stop();
+	}
 
 	document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
@@ -70,7 +70,7 @@ document.getElementById('save-recording').onclick = function() {
 		// generate filename
 		var save_name = current_recordings[i][0] + "-" + offset;
 		// save file
-        current_recordings[i][1].save(null, save_name);
+		current_recordings[i][1].save(null, save_name);
 	}
 	document.getElementById('start-recording').disabled = false;
 	//Warning about multiple recordings

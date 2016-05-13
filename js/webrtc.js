@@ -67,25 +67,22 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 }
 
 function attach_sink_id(element, sink_id, output_selector) {
-    if (typeof element.sinkId !== 'undefined') {
-        element.setSinkId(sink_id)
-        .then(function() {
-            console.log('Success, audio output device attached: ' + sink_id + ' to ' +
-            'element with ' + element.title + ' as source.');
-        })
-        .catch(function(error) {
-            var error_message = error;
-            if (error.name === 'SecurityError') {
-                error_message = 'You need to use HTTPS for selecting audio output ' +
-                'device: ' + error;
-            }
-            console.error(error_message);
-            // Jump back to first output device in the list as it's the default.
-            output_selector.selectedIndex = 0;
-        });
-    } else {
-        console.warn('Browser does not support output device selection.');
-    }
+	if (typeof element.sinkId !== 'undefined') {
+		element.setSinkId(sink_id).then(function() {
+			console.log('Success, audio output device attached: ' + sink_id + ' to ' + 'element with ' + element.title + ' as source.');
+		}).catch(function(error) {
+			var error_message = error;
+			if (error.name === 'SecurityError') {
+				error_message = 'You need to use HTTPS for selecting audio output ' + 'device: ' + error;
+			}
+			console.error(error_message);
+
+			// Jump back to first output device in the list as it's the default.
+			output_selector.selectedIndex = 0;
+		});
+	} else {
+		console.warn('Browser does not support output device selection.');
+	}
 }
 
 // Create visual controls upon accepting a call
@@ -109,21 +106,20 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// create controls for them
 	var table_row_2 = document.createElement('tr');
 	var table_cell_2 = document.createElement('td');
-    var table_row_3 = document.createElement('tr');
-    var table_cell_3 = document.createElement('td');
+	var table_row_3 = document.createElement('tr');
+	var table_cell_3 = document.createElement('td');
 	var video = document.createElement('audio');
 	video.setAttribute('id', callerEasyrtcid);
 	video.setAttribute('width', '300');
 	video.setAttribute('height', '30');
 	video.setAttribute('controls', 'controls');
-    
 
 	table_cell_2.appendChild(video);
 	table_row_2.appendChild(table_cell_2);
 
 	table.appendChild(table_row_1);
 	table.appendChild(table_row_2);
-    
+
 	list_item.appendChild(table);
 	user_box.appendChild(list_item);
 
@@ -131,43 +127,41 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	easyrtc.setVideoObjectSrc(video, stream);
 
 	function change_audio_destination(event) {
-	    var device_id = event.target.value;
-	    var output_selector = event.target;
-	    var element = video;
-	    
-	    attach_sink_id(element, device_id, output_selector);
+		var device_id = event.target.value;
+		var output_selector = event.target;
+		var element = video;
+
+		attach_sink_id(element, device_id, output_selector);
 	}
 
 	function got_devices(device_infos) {
-	    for (var i = 0; i !== device_infos.length; ++i) {
-	        var device_info = device_infos[i];
-	        var option = document.createElement('option');
-	        option.value = device_info.deviceId;
-	        if (device_info.kind === 'audiooutput') {
-	            console.info('Found audio output device: ', device_info.label);
-	            option.text = device_info.label || 'speaker ' +
-	                (masterOutputSelector.length + 1);
-	            selector.appendChild(option);
-	        } else {
-	            console.log('Found non audio output device: ', device_info.label);
-	        }
-	    }
-	    selector.addEventListener('change', change_audio_destination);
+		for (var i = 0; i !== device_infos.length; ++i) {
+			var device_info = device_infos[i];
+			var option = document.createElement('option');
+			option.value = device_info.deviceId;
+		
+			if (device_info.kind === 'audiooutput') {
+				console.info('Found audio output device: ', device_info.label);
+				option.text = device_info.label || 'speaker ' + (masterOutputSelector.length + 1);
+				selector.appendChild(option);
+			} else {
+				console.log('Found non audio output device: ', device_info.label);
+			}
+		}
+		selector.addEventListener('change', change_audio_destination);
 	}
 
-    if (is_chrome) {
-        var selector = document.createElement('select');
-        selector.setAttribute('class', 'output_selector');
-        table_cell_3.appendChild(selector);
-        table_row_3.appendChild(table_cell_3);
-        table.appendChild(table_row_3);
-        navigator.mediaDevices.enumerateDevices().then(got_devices)
-    } else {
-        console.warn('Output selection only supported by chrome');
-    }
-    
-    //.catch(error_callback);
-    
+	if (is_chrome) {
+		var selector = document.createElement('select');
+		selector.setAttribute('class', 'output_selector'); // Is this important?
+		table_cell_3.appendChild(selector);
+		table_row_3.appendChild(table_cell_3);
+		table.appendChild(table_row_3);
+		navigator.mediaDevices.enumerateDevices().then(got_devices)
+	} else {
+		console.warn('Output selection only supported by chrome');
+	}
+
 	// Object has been created, check if I am recording
 	if(recording) {
 		// I am recording, Add new stream to the record with timestamp so we can calculate the offset later

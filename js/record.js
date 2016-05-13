@@ -44,19 +44,3 @@ function record_handle(stream, filename, record_timestamp) {
 	current_recordings.push([filename, recorder_temp, record_timestamp]);
 	num_recording_streams++;
 }
-
-// Probably okay to delete all this...
-// convert bytes to megabytes/etc http://goo.gl/B3ae8c
-// function neaten_bytes(bytes) {
-// 	var k = 1000;
-// 	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-// 	if (bytes === 0) return '0 Bytes';
-// 		var i = parseInt(Math.floor(Math.log(bytes) / Math.log(k)), 10);
-// 		return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-// }
-
-// convert time to seconds or whatever http://goo.gl/6QNDcI
-// function neaten_time(milliseconds) {
-// 	var data = new Date(milliseconds);
-// 	return data.getUTCHours() + " hours, " + data.getUTCMinutes() + " minutes and " + data.getUTCSeconds() + " second(s)";
-// }
