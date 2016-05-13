@@ -96,7 +96,7 @@ $room_name = htmlentities($_GET['slug']);
 		</div> <!-- Close wrapper -->
 	</body>
 	<!-- The order of these is likely very important -->
-	<script src="//<?php echo HOST; ?>/js/button-management.js?v=1.0.0"></script>
+	<script src="//<?php echo HOST; ?>/js/button-management-04.js?v=1.0.0"></script>
 	<script src="//<?php echo HOST; ?>/js/record.js?v=1.0.0"></script>
 	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=1.0.0"></script>
 </html>

@@ -16,7 +16,7 @@ Note: Must be called before webrtc.js
 // Record peer audio in stereo
 // 1 == Mono
 // 2 == Stereo
-var stereo = 2;
+var stereo = 1;
 
 var current_recordings = [];
 var time_interval = 5000; // Time of each audio segment in milliseconds
