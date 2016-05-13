@@ -38,8 +38,8 @@ function record_handle(stream, filename, record_timestamp) {
 	recorder_temp.audioChannels = stereo;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
-	// recorder_temp.ondataavailable = function(blob) {
-	// };
+	recorder_temp.ondataavailable = function(blob) {
+	};
 
 	// Get blob after specific time interval
 	recorder_temp.start(time_interval);
