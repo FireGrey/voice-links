@@ -8,15 +8,17 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Reset */
+/* VL */
 
-    ul.users {
-        text-align: center;
-        list-style-type: none;
-    }
-    ul.users li {
-        float:left;
-    }
+ul.users {
+	text-align: center;
+	list-style-type: none;
+}
+ul.users li {
+	float:left;
+}
+
+/* Reset */
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
@@ -25,7 +27,7 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
-    
+
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
@@ -50,9 +52,9 @@
 	table, th, td  {
 		border-collapse: collapse;
 		border-spacing: 0;
-        #border: 4px solid white;
-        padding-bottom: 20px;
-    }
+		/*#border: 4px solid white;*/
+		padding-bottom: 20px;
+	}
 
 	body {
 		-webkit-text-size-adjust: none;
@@ -179,7 +181,7 @@
 
 		a:hover {
 			color: rgba(0, 255, 255, 1);
-            text-shadow: 0 0 3px rgba(0, 255, 255, 1);
+			text-shadow: 0 0 3px rgba(0, 255, 255, 1);
 		}
 
 	strong, b {
@@ -191,15 +193,14 @@
 	}
 
 	p {
-        color: rgba(255, 255, 255, 1);
+		color: rgba(255, 255, 255, 1);
 		margin: 0 0 1.5em 0;
 	}
 
-        p.user {
-            text-transform: capitalize;
-        }
-        
-        
+		p.user {
+			text-transform: capitalize;
+		}
+
 	h1, h2, h3, h4, h5, h6 {
 		color: rgba(255, 255, 255, 1);
 		line-height: 1.5;
@@ -652,10 +653,10 @@
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-            background-color: rgba(20, 20, 20, 1);
+			background-color: rgba(20, 20, 20, 1);
 			border-color: rgba(0, 255, 255, 1);
 			color: rgba(0, 255, 255, 1); !important;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 1);
+			text-shadow: 0 0 10px rgba(0, 255, 255, 1);
 		}
 
 		input[type="submit"].icon,
@@ -680,9 +681,9 @@
 		button.fit,
 		.button.fit {
 			display: block;
-            height: 75px;
-            font-size: 1.25em;
-            line-height: 75px;
+			height: 75px;
+			font-size: 1.25em;
+			line-height: 75px;
 			width: 100%;
 			margin: 0 0 0.75em 0;
 		}
@@ -728,7 +729,7 @@
 		padding: 2em 3em 3em 3em ;
 		background: rgba(50, 50, 50, 1);
 		border-radius: 4px;
-        border: solid 2px rgba(0, 255, 255, 1);
+		border: solid 2px rgba(0, 255, 255, 1);
 		cursor: default;
 		opacity: 0.95;
 		text-align: center;
@@ -746,10 +747,6 @@
 		transition: opacity 1s ease, transform 1s ease;
 	}
 
-        #main .conference {
-            
-		}
-        
 		#main .avatar {
 			position: relative;
 			display: block;

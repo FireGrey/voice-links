@@ -36,7 +36,7 @@ $room_name = htmlentities($_GET['slug']);
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Conference - Voice Links</title>
+		<title><?php echo $room_name; ?> - Voice Links</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="//<?php echo HOST; ?>/assets/css/main.css">
@@ -60,19 +60,18 @@ $room_name = htmlentities($_GET['slug']);
 				<!-- Main -->
 				<p>Send this link to others to allow them to join the conference:</p>
 				<form>
-					<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px">
+					<input type="text" onclick="this.select()" value="https://<?php echo HOST . '/room/' . $room_name; ?>" style="width: 500px; text-transform: lowercase !important;">
 				</form>
 			</div>
 			
 			<section id="main" style="width:80%">
 				<header>
-					<!-- Recording Controls -->
 					<h1>Recording Options</h1>
 					<button id="start-recording">Start</button>
 					<button id="stop-recording" disabled>Stop</button>
 					<button id="save-recording" disabled>Save</button>
 					
-					<h1>Conference Members</h1>
+					<h1>Member Controls</h1>
 					<div id="other-clients"> </div><br>
 					<!-- Our box -->
 					<video id="self" width="1" height="1" style="display:none"></video>
@@ -97,8 +96,7 @@ $room_name = htmlentities($_GET['slug']);
 		</div> <!-- Close wrapper -->
 	</body>
 	<!-- The order of these is likely very important -->
-	<!-- We add a version to these requests to stop the browser caching old versions of rapidly updating files -->
-	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
-	<script src="//<?php echo HOST; ?>/js/record.js?v=t<?php echo rand(1000,100000); ?>"></script>
-	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=t<?php echo rand(1000,100000); ?>"></script>
+	<script src="//<?php echo HOST; ?>/js/button-management.js?v=1.0.0"></script>
+	<script src="//<?php echo HOST; ?>/js/record.js?v=1.0.0"></script>
+	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=1.0.0"></script>
 </html>
