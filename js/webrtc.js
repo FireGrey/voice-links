@@ -130,7 +130,6 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 		var device_id = event.target.value;
 		var output_selector = event.target;
 		var element = video;
-
 		attach_sink_id(element, device_id, output_selector);
 	}
 

@@ -12,5 +12,5 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 # Internal rewrite of blah to blah.php
 RewriteRule ^(.*)$ $1.php
 
-# Set CORS
+# Set CORS - Can be removed if not required
 Header add Access-Control-Allow-Origin "*"
