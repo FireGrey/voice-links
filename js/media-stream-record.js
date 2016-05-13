@@ -563,7 +563,7 @@ function MediaRecorderWrapper(mediaStream) {
         }
 
         if (self.mimeType.indexOf('audio') !== -1) {
-            self.mimeType = IsChrome ? 'audio/webm' : 'audio/ogg';
+            //self.mimeType = IsChrome ? 'audio/webm' : 'audio/ogg'; VL: Comment out to force save as wav
         }
 
         self.blob = null;
