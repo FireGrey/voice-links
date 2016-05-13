@@ -27,7 +27,7 @@ function rand_string($length) {
 // Check if page has variables
 if (!isset($_POST['gen-session'])) {
 	header('Location: ./');
-	exit;
+	die('Couldn\'t change header');
 }
 
 // Make slug
@@ -69,7 +69,7 @@ $result->bind_param('sss',
 if ($result->execute()) {
 	// Redirect to room?slug=room_name
 	header('Location: room/' . $room_name);
-	exit;
+	die('Couldn\'t change header');
 } else {
 	die('Error inserting to db. Call for help.');
 }
