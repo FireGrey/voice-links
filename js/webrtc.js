@@ -88,31 +88,6 @@ function attach_sink_id(element, sink_id, output_selector) {
     }
 }
 
-function change_audio_destination(event) {
-    var device_id = event.target.value;
-    var output_selector = event.target;
-    var element = video;
-    
-    attach_sink_id(element, device_id, output_selector);
-}
-
-function got_devices(device_infos) {
-    for (var i = 0; i !== device_infos.length; ++i) {
-        var device_info = device_infos[i];
-        var option = document.createElement('option');
-        option.value = device_info.deviceId;
-        if (device_info.kind === 'audiooutput') {
-            console.info('Found audio output device: ', device_info.label);
-            option.text = device_info.label || 'speaker ' +
-                (masterOutputSelector.length + 1);
-            selector.appendChild(option);
-        } else {
-            console.log('Found non audio output device: ', device_info.label);
-        }
-    }
-    selector.addEventListener('change', change_audio_destination);
-}
-
 // Create visual controls upon accepting a call
 easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	media_stream_list.push([callerEasyrtcid, stream]);
@@ -154,15 +129,39 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 
 	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
-    
-    if(is_chrome) {
+
+	function change_audio_destination(event) {
+	    var device_id = event.target.value;
+	    var output_selector = event.target;
+	    var element = video;
+	    
+	    attach_sink_id(element, device_id, output_selector);
+	}
+
+	function got_devices(device_infos) {
+	    for (var i = 0; i !== device_infos.length; ++i) {
+	        var device_info = device_infos[i];
+	        var option = document.createElement('option');
+	        option.value = device_info.deviceId;
+	        if (device_info.kind === 'audiooutput') {
+	            console.info('Found audio output device: ', device_info.label);
+	            option.text = device_info.label || 'speaker ' +
+	                (masterOutputSelector.length + 1);
+	            selector.appendChild(option);
+	        } else {
+	            console.log('Found non audio output device: ', device_info.label);
+	        }
+	    }
+	    selector.addEventListener('change', change_audio_destination);
+	}
+
+    if (is_chrome) {
         var selector = document.createElement('select');
         selector.setAttribute('class', 'output_selector');
         table_cell_3.appendChild(selector);
         table_row_3.appendChild(table_cell_3);
         table.appendChild(table_row_3);
-        navigator.mediaDevices.enumerateDevices()
-        .then(got_devices)
+        navigator.mediaDevices.enumerateDevices().then(got_devices)
     } else {
         console.warn('Output selection only supported by chrome');
     }
