@@ -184,7 +184,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 				option.text = device_info.label || 'speaker ' + (masterOutputSelector.length + 1);
 				selector.appendChild(option);
 			} else {
-				console.log('Found non audio output device: ', device_info.label);
+				//console.log('Found non audio output device: ', device_info.label);
 			}
 		}
 		selector.addEventListener('change', change_audio_destination);
