@@ -30,7 +30,7 @@ function record_handle(stream, filename, record_timestamp) {
 	}
 	// Create temporary MediaRecorder object from media-stream-record.js to push to array later
 	var recorder_temp = new MediaStreamRecorder(stream);
-	// Save in .wav file format
+	// Save in .wav file format - not that is does without media stream recorder >1.3.1 - but that breaks even more shit
 	recorder_temp.mimeType = 'audio/wav';
 	// Set the stream
 	recorder_temp.stream = stream;
@@ -38,8 +38,8 @@ function record_handle(stream, filename, record_timestamp) {
 	recorder_temp.audioChannels = stereo;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
-	// recorder_temp.ondataavailable = function(blob) {
-	// };
+	recorder_temp.ondataavailable = function(blob) {
+	};
 
 	// Get blob after specific time interval
 	recorder_temp.start(time_interval);
