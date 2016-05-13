@@ -44,7 +44,7 @@ $room_name = htmlentities($_GET['slug']);
 
 		<script src="//<?php echo HOST; ?>:8080/socket.io/socket.io.js"></script>
 		<script src="//<?php echo HOST; ?>:8080/easyrtc/easyrtc.js"></script>
-		<script src="//<?php echo HOST; ?>/js/media-stream-record-1.3.0-adapt.js"></script> <!-- Record Dependancies -->
+		<script src="//<?php echo HOST; ?>/js/media-stream-record-1.3.0.js"></script> <!-- Record Dependancies -->
 	</head>
 
 	<body onload="my_init('<?php echo $room_name; ?>')">
