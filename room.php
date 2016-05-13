@@ -67,12 +67,12 @@ $room_name = htmlentities($_GET['slug']);
 			<section id="main" style="width:80%">
 				<header>
 					<!-- Recording Controls -->
-					<h1>Recording Options:</h1>
+					<h1>Recording Options</h1>
 					<button id="start-recording">Start</button>
 					<button id="stop-recording" disabled>Stop</button>
 					<button id="save-recording" disabled>Save</button>
 					
-					<h1>Conference Members:</h1>
+					<h1>Conference Members</h1>
 					<div id="other-clients"> </div><br>
 					<!-- Our box -->
 					<video id="self" width="1" height="1" style="display:none"></video>
@@ -82,26 +82,23 @@ $room_name = htmlentities($_GET['slug']);
 							<!-- New clients get a box in here -->
 						</ul>
 					</div>
-
-					<!-- EXPERIMENT -->
-					<div id="audios-container"></div>
-					<!-- END EXPERIMENT -->
 				</header>
 			</section>
 
 			<!-- Footer -->
 			<footer id="footer">
 				<ul class="copyright">
-					<li>&copy; Voice Links</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					<li>Voice Links</li>
+					<li><a target="_blank" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width: 0; margin-bottom: -3px" src="https://i.creativecommons.org/l/by/3.0/80x15.png" /></a></li>
+					<li>Design inspired by <a href="http://html5up.net">HTML5 UP</a></li>
 				</ul>
-				<span>Icons made by <a href="http://www.flaticon.com/authors/rami-mcmin" title="Rami McMin">Rami McMin</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></span>
+				<span>Icons made by <a href="http://www.flaticon.com/authors/rami-mcmin" title="Rami McMin">Rami McMin</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></span>
 			</footer>
 		</div> <!-- Close wrapper -->
 	</body>
 	<!-- The order of these is likely very important -->
-	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<!-- We add a version to these requests to stop the browser caching old versions of rapidly updating files -->
+	<script src="//<?php echo HOST; ?>/js/button-management.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<script src="//<?php echo HOST; ?>/js/record.js?v=t<?php echo rand(1000,100000); ?>"></script>
 	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=t<?php echo rand(1000,100000); ?>"></script>
 </html>

@@ -831,6 +831,13 @@
 					border-left: 0;
 				}
 
+	#footer span {
+		margin: 0;
+		padding: 0;
+		font-size: 0.9em;
+		list-style: none;
+	}
+
 /* Wrapper */
 
 	#wrapper {
@@ -880,4 +887,5 @@
 		body.is-ie #wrapper {
 			height: 100%;
 		}
-        
+
+		
