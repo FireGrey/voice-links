@@ -1,12 +1,14 @@
 # Voice Links Installation Guide
 
-This guide has been designed for Ubuntu 14.04.3
+*Caveat:* This application is a proof of concept and does not conform to web application security best practices. Caution should be taken before running any of the commands listed in the installation guide. Note that some commands use `example.com` as a placeholder domain.
+
+This guide has been designed for *Ubuntu 14.04.3*
 
 ## Installing EasyRTC
 
 1. Install Node.js with
 	`sudo apt-get install nodejs`
-2. Download EasyRTC v1.0.16 with
+2. Download EasyRTC v1.0.16 (later versions may work) with
 	`git clone -b beta https://github.com/priologic/easyrtc.git`
 3. Install npm with
 	`sudo apt-get install npm`
@@ -18,19 +20,15 @@ This guide has been designed for Ubuntu 14.04.3
 	`screen -R easyrtc`
 7. Run `nodejs server.js` from inside the server_example directory
 
-Note: You can exit the screen session using `ctrl-a + C`
+Note: You can exit the screen session using `ctrl-a + c`
 
-You will now have a working installation of EasyRTC running on Port 8080
-
-You can test this on http://example.com:8080 
-
-HTTPS will not be working, so we will need to configure this
+You will now have a working installation of EasyRTC running on port 8080. Test this by browsing to it in a supported web browser.
 
 ## Configuring HTTPS on EasyRTC
 
-Google Chrome requires HTTPS when using WebRTC
+Supported browsers require HTTPS when using WebRTC.
 
-1. Create an SSL key and cert
+1. Create an SSL key and cert, replacing example.com with your domain
 ```
 sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 cd /opt/letsencrypt
@@ -43,7 +41,7 @@ Remove the following code
 var http    = require("http");
 ```
 
-And insert the following code in its place
+Insert the following code in its place
 ```javascript
 var https = require("https");
 var fs = require("fs");
@@ -54,7 +52,7 @@ Remove the following code
 var webServer = http.createServer(httpApp).listen(8080);
 ```
 
-And insert the following code in its place, replacing example.com with your domain
+Insert the following code in its place, replacing example.com with your domain
 ``` javascript
 var webServer = https.createServer(
 {
@@ -67,22 +65,23 @@ app).listen(8080);
 
 4. Run `npm install` from inside the server_example directory again
 
-You can now run `nodejs server.js`
+You can now run `nodejs server.js` to run EasyRTC with HTTPS support.
 
-Test inside a browser to see if your configuration worked
+Test your configuration works inside a supported browser.
 
-## Apache/PHP/MySQL Install
+## Apache/PHP/MySQL (LAMP) Install
 
-1. Run `sudo apt-get -y install apache2 mysql-server php5-mysql php5 libapache2-mod-php5 php5-mcrypt`
+1. Install the required dependancies for Voice Links `sudo apt-get -y install apache2 mysql-server php5-mysql php5 libapache2-mod-php5`
 2. Enter password `hh1488yoloswag` for MySQL root password
+	* If you change the password make sure to edit `config.php` with the updated MySQL credentials
 3. Run `sudo mysql_install_db`
-4. Run `sudo mysql_secure_installation`
-5. Do not change password unless also changing config.php inside voicelinks
-6. Follow all defaults
+4. Run `sudo mysql_secure_installation` and follow the instructions - defaults work fine
 
-You will now have an installation of the LAMP stack
+You will now have a standard LAMP stack installed.
 
-## Adding the Web App
+## Cloning the Web App
+
+Clone the `voice-links` web application.
 
 1. `git clone https://github.com/FireGrey/voice-links.git`
 2. `sudo mv ./voice-links /var/www/voice-links/`
@@ -100,7 +99,7 @@ You will now have an installation of the LAMP stack
 ```
 3. `sudo a2enmod rewrite`
 4. `sudo service apache2 restart`
-5. `nano /etc/apache2/sites-available/000-default.conf` and add the following
+5. `nano /etc/apache2/sites-available/000-default.conf` and add the following, replacing example.com with your domain
 ```
 <VirtualHost *:80>
 	DocumentRoot /var/www/voice-links
@@ -109,9 +108,19 @@ You will now have an installation of the LAMP stack
 ```
 6. `sudo service apache2 restart`
 7. `cd /opt/letsencrypt`
-8. `./letsencrypt-auto --apache -d example.com`
+8. Run, replacing example.com with your domain `./letsencrypt-auto --apache -d example.com`
+
+This will configure Voice Links to run at the base URL `example.com/`. If you chose to run Voice Links under a different base URL i.e. `example.com/some-directory/` you will need to update the `RewriteBase` in the `.htaccess` file to match.
 
 ## Notes
+
+### Saved Recordings Filename
+
+Recordings are saved for each user in the room. The filename format is the user ID followed by the offset between the user clicking the `Start` recording button and the remote peers microphone being recorded. This allows you to accurately merge the individual recorded files even when peers join the room later than when the recording begun.
+
+`ID-DTcqZTWJCTPy6EqO_Offset-0ms` filename represents the user ID `DTcqZTWJCTPy6EqO` who was already in the room at the time recording begun because their offset is `0ms` zero milliseconds.
+
+`ID-OLoodr8X5G1mCvKe_Offset-18927ms` filename represents user ID `OLoodr8X5G1mCvKe` who joined the room `18927ms` 18.9 seconds after recording begun.
 
 ### Browser Support
 
