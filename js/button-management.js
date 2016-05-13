@@ -69,7 +69,7 @@ document.getElementById('save-recording').onclick = function() {
 		// Calcualte offset for peers in milliseconds
 		var offset = current_recordings[i][2] - begin_record_timestamp;
 		// Generate filename
-		var save_name = 'ID-' + current_recordings[i][0] + '_Offset-' + offset;
+		var save_name = 'ID-' + current_recordings[i][0] + '_Offset-' + offset + 'ms';
 		// Save file
 		current_recordings[i][1].save(null, save_name);
 	}
