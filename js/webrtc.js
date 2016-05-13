@@ -23,25 +23,6 @@ function roomListener(roomName, otherPeers) {
 }
 
 function my_init(roomName) {
-	// Set STUN/TURN config
-	var ice_servers = [
-		{"url":"stun:stun:stun.l.google.com:19302"},
-		{url:'stun:stun1.l.google.com:19302'},
-		{url:'stun:stun2.l.google.com:19302'},
-		{url:'stun:stun3.l.google.com:19302'},
-		{url:'stun:stun4.l.google.com:19302'},
-		{
-			"url":"turn:numb.viagenie.ca",
-			"username":"muazkh",
-			"credential":"webrtc@live.com"
-		},
-		{
-			"url":"turn:192.158.29.39:3478?transport=tcp",
-			"username":"JZEOEt2V3Qb0y27GRntt2u2PAYA=",
-			"credential":"28224511:1379330808"
-		}
-	];
-	easyrtc.setOption("appIceServers", ice_servers);
 
 	easyrtc.setSocketUrl(":8080");
 	easyrtc.setRoomOccupantListener(roomListener);
@@ -55,7 +36,7 @@ function my_init(roomName) {
 	easyrtc.enableVideo(false);
 
 
-	// I have re-iomplamented this - see above.
+	// I have re-iomplamented this in the server
 	// easyrtc.setIceUsedInCalls(
 	// 	{"iceServers": [
 	// 		{url:'stun:stun01.sipphone.com'},
