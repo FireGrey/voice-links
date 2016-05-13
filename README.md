@@ -20,7 +20,7 @@ This guide has been designed for **Ubuntu 14.04.3**
 	`screen -R easyrtc`
 7. Run `nodejs server.js` from inside the server_example directory
 
-Note: You can exit the screen session using `ctrl-a + c`
+Note: You can exit the screen session using `ctrl-a + d`
 
 You will now have a working installation of EasyRTC running on port 8080. Test this by browsing to it in a supported web browser.
 
@@ -66,7 +66,9 @@ Supported browsers require HTTPS when using WebRTC.
 
 7. Run `npm install` from inside the server_example directory again
 
-You can now run `nodejs server.js` to run EasyRTC with HTTPS support.
+You can now run `screen -r easyrtc` and `sudo nodejs server.js` to run EasyRTC with HTTPS support.
+
+Note: You can exit the screen session using `ctrl-a + d`
 
 Test your configuration works inside a supported browser.
 
