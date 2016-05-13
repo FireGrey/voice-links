@@ -77,22 +77,22 @@ Test inside a browser to see if your configuration worked
 2. Enter password `hh1488yoloswag` for MySQL root password
 3. Run `sudo mysql_install_db`
 4. Run `sudo mysql_secure_installation`
-5. Do not change password unless also changing config.php inside genlinks
+5. Do not change password unless also changing config.php inside voicelinks
 6. Follow all defaults
 
 You will now have an installation of the LAMP stack
 
 ## Adding the Web App
 
-1. `git clone https://github.com/FireGrey/genlinks.git`
-2. `sudo mv ./genlinks /var/www/genlinks/`
+1. `git clone https://github.com/FireGrey/voice-links.git`
+2. `sudo mv ./voice-links /var/www/voice-links/`
 
 ## Configuring the Web Server
 
-1. Run `mysql -u root -p < /var/www/genlinks/DB.sql`
+1. Run `mysql -u root -p < /var/www/voice-links/DB.sql`
 2. `nano /etc/apache2/apache2.conf` and add the following
 ```
-<Directory /var/www/genlinks>
+<Directory /var/www/voice-links>
 	Options Indexes FollowSymLinks
 	AllowOverride All
 	Require all granted
@@ -103,7 +103,7 @@ You will now have an installation of the LAMP stack
 5. `nano /etc/apache2/sites-available/000-default.conf` and add the following
 ```
 <VirtualHost *:80>
-	DocumentRoot /var/www/genlinks
+	DocumentRoot /var/www/voice-links
 	ServerName example.com
 </VirtualHost>
 ```
@@ -117,21 +117,21 @@ You will now have an installation of the LAMP stack
 
 Chrome 50.0 -- Well Supported 
 
-Firefox 46.0.1 -- Moderataly Supported (see issues)
+Firefox 46.0.1 -- Moderataly Supported (see bugs)
 
 ### Bugs
 
 1. `No Viable Ice` errors for heavily NAT'ed peers
 	* Workaround: Switch to a quieter connection source (3G, VPN)
-2. Rare crash in firefox when recording multiple peers
-3. Chrome recordings are only saved as webm (inconvient format for audio editing)
-	* Waiting for newer version of MediaStreamRecorder
-4. HTML5 audio box timer freezes in Chrome with more than 2 peers
+2. In Firefox, peers who join after recording has started are not included in recording
+	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.2)
+3. Rare crash in Firefox when recording multiple peers
+	* Hard to replicate
+4. Chrome recordings are only saved as webm (inconvient format for audio editing)
+	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.2)
+5. HTML5 audio box timer freezes in Chrome with more than 2 peers
 	* Likely fixed in later versions of Chrome
-
-### Other
-
-To fix an error with output selection boxed being blank:
-
-Open `chrome://flags` and `enable` `Experimental Web Platform` features on a chrome browser
-
+6. Output selection boxes blank for some Chrome users
+	* Workaround: Open `chrome://flags` and `enable` `Experimental Web Platform`
+7. Output selection only supported by Chrome
+	* Likely supported in later versions of Firefox
