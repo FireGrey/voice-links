@@ -4,6 +4,7 @@ var called_before = false; // is this a new user? - false means they haven't cal
 //[n][0] == easyrtcid String
 //[n][1] == MediaStream Object
 var media_stream_list = [];
+// check if chrome
 var is_chrome = !!window.chrome;
 
 function roomListener(roomName, otherPeers) {
@@ -126,6 +127,53 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 	}
 }
 
+function attach_sink_id(element, sink_id, output_selector) {
+    if (typeof element.sinkId !== 'undefined') {
+        element.setSinkId(sink_id)
+        .then(function() {
+            console.log('Success, audio output device attached: ' + sink_id + ' to ' +
+            'element with ' + element.title + ' as source.');
+        })
+        .catch(function(error) {
+            var error_message = error;
+            if (error.name === 'SecurityError') {
+                error_message = 'You need to use HTTPS for selecting audio output ' +
+                'device: ' + error;
+            }
+            console.error(error_message);
+            // Jump back to first output device in the list as it's the default.
+            output_selector.selectedIndex = 0;
+        });
+    } else {
+        console.warn('Browser does not support output device selection.');
+    }
+}
+
+function change_audio_destination(event) {
+    var device_id = event.target.value;
+    var output_selector = event.target;
+    var element = video;
+    
+    attach_sink_id(element, device_id, output_selector);
+}
+
+function got_devices(device_infos) {
+    for (var i = 0; i !== device_infos.length; ++i) {
+        var device_info = device_infos[i];
+        var option = document.createElement('option');
+        option.value = device_info.deviceId;
+        if (device_info.kind === 'audiooutput') {
+            console.info('Found audio output device: ', device_info.label);
+            option.text = device_info.label || 'speaker ' +
+                (masterOutputSelector.length + 1);
+            selector.appendChild(option);
+        } else {
+            console.log('Found non audio output device: ', device_info.label);
+        }
+    }
+    selector.addEventListener('change', change_audio_destination);
+}
+
 // Create visual controls upon accepting a call
 easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	media_stream_list.push([callerEasyrtcid, stream]);
@@ -168,52 +216,6 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	// set peers stream to corresponding html tag
 	easyrtc.setVideoObjectSrc(video, stream);
     
-    function attach_sink_id(element, sink_id, output_selector) {
-        if (typeof element.sinkId !== 'undefined') {
-            element.setSinkId(sink_id)
-            .then(function() {
-                console.log('Success, audio output device attached: ' + sink_id + ' to ' +
-                'element with ' + element.title + ' as source.');
-            })
-            .catch(function(error) {
-                var error_message = error;
-                if (error.name === 'SecurityError') {
-                    error_message = 'You need to use HTTPS for selecting audio output ' +
-                    'device: ' + error;
-                }
-                console.error(error_message);
-                // Jump back to first output device in the list as it's the default.
-                output_selector.selectedIndex = 0;
-            });
-        } else {
-            console.warn('Browser does not support output device selection.');
-        }
-    }
-    
-    function change_audio_destination(event) {
-        var device_id = event.target.value;
-        var output_selector = event.target;
-        var element = video;
-        
-        attach_sink_id(element, device_id, output_selector);
-    }
-    
-    function got_devices(device_infos) {
-        for (var i = 0; i !== device_infos.length; ++i) {
-            var device_info = device_infos[i];
-            var option = document.createElement('option');
-            option.value = device_info.deviceId;
-            if (device_info.kind === 'audiooutput') {
-                console.info('Found audio output device: ', device_info.label);
-                option.text = device_info.label || 'speaker ' +
-                    (masterOutputSelector.length + 1);
-                selector.appendChild(option);
-            } else {
-                console.log('Found non audio output device: ', device_info.label);
-            }
-        }
-        selector.addEventListener('change', change_audio_destination);
-    }
     if(is_chrome) {
         var selector = document.createElement('select');
         selector.setAttribute('class', 'output_selector');
