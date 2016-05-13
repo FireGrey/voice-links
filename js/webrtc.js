@@ -34,26 +34,16 @@ function my_init(roomName) {
 	easyrtc.enableAudio(true);
 	easyrtc.enableVideo(false);
 
-	// easyrtc.setIceUsedInCalls(
-	// 	{"iceServers": [
-	// 		{url:'stun:stun:stun.l.google.com:19302'},
-	// 		{url:'stun:stun1.l.google.com:19302'},
-	// 		{url:'stun:stun2.l.google.com:19302'},
-	// 		{url:'stun:stun3.l.google.com:19302'},
-	// 		{url:'stun:stun4.l.google.com:19302'},
-	// 		{
-	// 			url:"turn:numb.viagenie.ca",
-	// 			credential:"webrtc@live.com",
-	// 			username:"muazkh"
-	// 		},
-	// 		{
-	// 			url:"turn:192.158.29.39:3478?transport=tcp",
-	// 			credential:"JZEOEt2V3Qb0y27GRntt2u2PAYA=",
-	// 			username:"28224511:1379330808"
-	// 		}
-	// 	]}
-	// );
+	easyrtc.initMediaSource(
+		function(){
+			// create or join the room connection
+			easyrtc.connect(roomName, connectSuccess, connectFailure);
+		},
+		connectFailure
+	);
+}
 
+function performCall(easyrtcid) {
 	// Set STUN/TURN config
 	easyrtc.setIceUsedInCalls(
 		{"iceServers": [
@@ -77,7 +67,7 @@ function my_init(roomName) {
 			{url:'stun:stun.voxgratia.org'},
 			{url:'stun:stun.xten.com'},
 			{
-			url: 'turn:numb.viagenie.ca',
+				url: 'turn:numb.viagenie.ca',
 				credential: 'muazkh',
 				username: 'webrtc@live.com'
 			},
@@ -94,17 +84,6 @@ function my_init(roomName) {
 		}
 	);
 
-
-	easyrtc.initMediaSource(
-		function(){
-			// create or join the room connection
-			easyrtc.connect(roomName, connectSuccess, connectFailure);
-		},
-		connectFailure
-	);
-}
-
-function performCall(easyrtcid) {
 	easyrtc.call(
 		easyrtcid,
 		function(easyrtcid) { console.log("completed call to " + easyrtcid);},
