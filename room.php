@@ -44,7 +44,7 @@ $room_name = htmlentities($_GET['slug']);
 
 		<script src="//<?php echo HOST; ?>:8080/socket.io/socket.io.js"></script>
 		<script src="//<?php echo HOST; ?>:8080/easyrtc/easyrtc.js"></script>
-		<script src="//<?php echo HOST; ?>/js/media-stream-record.js"></script> <!-- Record Dependancies -->
+		<script src="//<?php echo HOST; ?>/js/media-stream-record-04.js"></script> <!-- Record Dependancies -->
 	</head>
 
 	<body onload="my_init('<?php echo $room_name; ?>')">
@@ -96,7 +96,7 @@ $room_name = htmlentities($_GET['slug']);
 		</div> <!-- Close wrapper -->
 	</body>
 	<!-- The order of these is likely very important -->
-	<script src="//<?php echo HOST; ?>/js/button-management-04.js?v=1.0.0"></script>
+	<script src="//<?php echo HOST; ?>/js/button-management.js?v=1.0.0"></script>
 	<script src="//<?php echo HOST; ?>/js/record.js?v=1.0.0"></script>
 	<script src="//<?php echo HOST; ?>/js/webrtc.js?v=1.0.0"></script>
 </html>
