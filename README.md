@@ -1,4 +1,4 @@
-# VoiceLinks Installation Guide
+# Voice Links Installation Guide
 
 This guide has been designed for Ubuntu 14.04.3
 
@@ -113,8 +113,25 @@ You will now have an installation of the LAMP stack
 
 ## Notes
 
-The web app works best with Chrome 50
+### Browser Support
+
+Chrome 50.0 -- Well Supported 
+
+Firefox 46.0.1 -- Moderataly Supported (see issues)
+
+### Bugs
+
+1. `No Viable Ice` errors for heavily NAT'ed peers
+	* Workaround: Switch to a quieter connection source (3G, VPN)
+2. Rare crash in firefox when recording multiple peers
+3. Chrome recordings are only saved as webm (inconvient format for audio editing)
+	* Waiting for newer version of MediaStreamRecorder
+4. HTML5 audio box timer freezes in Chrome with more than 2 peers
+	* Likely fixed in later versions of Chrome
+
+### Other
 
 To fix an error with output selection boxed being blank:
 
 Open `chrome://flags` and `enable` `Experimental Web Platform` features on a chrome browser
+
