@@ -697,7 +697,7 @@ function MediaRecorderWrapper(mediaStream) {
             self.ondataavailable(blob);
 
             // record next interval
-            // self.start(timeSlice); FUCK OFF. NO.
+            self.start(timeSlice);
         };
 
         mediaRecorder.onerror = function(error) {
