@@ -1,16 +1,12 @@
 <?php
 require_once('config.php');
 
+// Create URL safe room name
 function slug($title) {
-	// replace non letter or digits by -
 	$title = preg_replace('~[^\\pL\d]+~u', '-', $title);
-	// trim
 	$title = trim($title, '-');
-	// transliterate - hide warnings
 	$title = @iconv('utf-8', 'us-ascii//TRANSLIT', $title);
-	// lowercase
 	$title = strtolower($title);
-	// remove unwanted characters
 	$title = preg_replace('~[^-\w]+~', '', $title);
 
 	if (empty($title)) {
@@ -28,13 +24,13 @@ function rand_string($length) {
 	return $salt;
 }
 
-// on submit
+// Check if page has variables
 if (!isset($_POST['gen-session'])) {
 	header('Location: ./');
 	exit;
 }
 
-// make slug (from post request?)
+// Make slug
 if (empty($_POST['room-name'])) {
 	$room_name = slug(rand_string(20));
 } else {
@@ -42,10 +38,10 @@ if (empty($_POST['room-name'])) {
 	$room_name = slug($room_name);
 }
 
-// generate expiry time 24 hours in advance
+// Generate expiry time 12 hours in advance
 $expire_time = date("Y-m-d G:i:s", strtotime('+12 hours'));
 
-// check room not already in use
+// Check room not already in use
 $query = "	SELECT room_id FROM rooms
 			WHERE expire > NOW()
 			AND slug = ?";
@@ -61,7 +57,7 @@ if ($result->num_rows !== 0) {
 	die('There is already a valid room with that name. Would you like to <a href="/room/' . $room_name . '">join it</a>?');
 }
 
-// add slug to db with expiry timestamp
+// Add slug to db with expiry timestamp
 $query = "	INSERT INTO rooms
 		  	(slug, expire, ip)
 		  	VALUES (?, ?, ?)";
@@ -71,12 +67,10 @@ $result->bind_param('sss',
 					$expire_time,
 					$_SERVER['REMOTE_ADDR']);
 if ($result->execute()) {
-	// redirect to room?slug=room_name
+	// Redirect to room?slug=room_name
 	header('Location: room/' . $room_name);
 	exit;
 } else {
 	die('Error inserting to db. Call for help.');
 }
 $result->close();
-
-?>

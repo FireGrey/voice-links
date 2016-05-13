@@ -16,64 +16,65 @@ window.onbeforeunload = function() {
 	document.getElementById('start-recording').disabled = false;
 };
 
+// Start recording on click
 document.getElementById('start-recording').onclick = function() {
 	this.disabled = true;
 	recording = true; // I am recording!
 
-	//Record Host's Stream
+	// Get timestamp that recording begins
+	begin_record_timestamp = Date.now();
+
+	// Record Host's Stream
 	var host_user_id = easyrtc.myEasyrtcid;
 	var main_stream = easyrtc.getLocalStream();
-	record_handle(main_stream, host_user_id);
-	//Record the streams of peers
+	record_handle(main_stream, host_user_id, Date.now());
+
+	// Loop through remote peers and send to record handle
 	for (var i = 0; i < media_stream_list.length; i++) {   
 		var user_easyrtcid = media_stream_list[i][0];	
 		var user_stream = media_stream_list[i][1];
-		record_handle(user_stream, user_easyrtcid);
+		record_handle(user_stream, user_easyrtcid, Date.now());
 	}
 
-	// enable the ability to stop recording now we have started
 	document.getElementById('stop-recording').disabled = false;
-	//Warning about multiple recordings in one session (without a refresh)
+	
+	// Warning about multiple recordings in one session (without a refresh)
 	if (files_saved == 1) {
-		document.getElementById('stop-recording').innerHTML = "Caution: Out of Scope";
+		console.log('You cannot save multiple sessions without refreshing');
 	}
 
-	// Get timestamp that recording begins
-	begin_record_timestamp = Date.now();
 };
 
 document.getElementById('stop-recording').onclick = function() {
 	this.disabled = true;
-	// stop recording all streams
+
+	// Stop recording all streams
 	for (var i = 0; i < num_recording_streams; i++) {
 		current_recordings[i][1].stop();
-		//current_recordings[i][1].stream.stop();
 	}
 
 	document.getElementById('save-recording').disabled = false;
 	recording = false; // I have stopped recording
-	//Warning about multiple recordings
+
+	// Warning about multiple recordings
 	if (files_saved == 1) {
-		document.getElementById('save-recording').innerHTML = "Have fun with your duplicate files";
+		console.log('You cannot save multiple sessions without refreshing');
 	}
 };
 
 document.getElementById('save-recording').onclick = function() {
 	this.disabled = true;
+
 	for (var i = 0; i < num_recording_streams; i++) {
-		// calcualte offset for peers in milliseconds if offset exists
-		if (current_recordings[i][2] != '0') {
-			var offset = current_recordings[i][2] - begin_record_timestamp;
-		} else {
-			var offset = current_recordings[i][2];
-		}
-		// generate filename
-		var save_name = current_recordings[i][0] + "-" + offset;
-		// save file
+		// Calcualte offset for peers in milliseconds
+		var offset = current_recordings[i][2] - begin_record_timestamp;
+		// Generate filename
+		var save_name = 'ID-' + current_recordings[i][0] + '_Offset-' + offset;
+		// Save file
 		current_recordings[i][1].save(null, save_name);
 	}
-	document.getElementById('start-recording').disabled = false;
-	//Warning about multiple recordings
+
+	// Warning about multiple recordings
 	document.getElementById('start-recording').innerHTML = "Done!"; // We don't have to give away that clicking this again will break everything ;)
 	files_saved = 1;
 };

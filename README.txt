@@ -1,2 +1,4 @@
-.htaccess needs path updated for production (line 2)
-config.php needs MySQL creds for production (lines 12 to 15)
+Get it working:
+
+Update '.htaccess' line 2 to match document root
+Update 'config.php' line 11 to 14 with correct MySQL credentials

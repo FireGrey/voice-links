@@ -12,35 +12,38 @@ Note: Must be called before webrtc.js
 //[n][0] == easyrtcid String
 //[n][1] == MediaStreamRecorder Object
 //[n][2] == timestamp in milliseconds when record begins
+
+// Record peer audio in stereo
+// 1 == Mono
+// 2 == Stereo
+var stereo = 1;
+
 var current_recordings = [];
-var time_interval = 5000; // time of each audio segment in milliseconds.
+var time_interval = 5000; // Time of each audio segment in milliseconds
 var recording = false; // Am I recording yet?
-var num_recording_streams = 0; // Amount of streams that are currently being recorded (minus 1)
+var num_recording_streams = 0; // Amount of streams that are currently being recorded
 
 function record_handle(stream, filename, record_timestamp) {
-	// check if offset is set
+	// Check if offset isn't set
 	if (typeof record_timestamp == 'undefined') {
-		// if 'record_timestamp' is undefined it means user was already in the room when recording begun
-		// therefore they have no offset;
-		record_timestamp = '0'; // zero millisecond offset
+		console.log('Record timestamp not set. Set it!');
 	}
-	//Create temporary MediaRecorder object from media-stream-record.js to push to array later
+	// Create temporary MediaRecorder object from media-stream-record.js to push to array later
 	var recorder_temp = new MediaStreamRecorder(stream);
-	// Save in .ogg file format - Chrome ignores this for some reason and records in .webm anyway...
-	recorder_temp.mimeType = 'audio/ogg';
+	// Save in .wav file format
+	recorder_temp.mimeType = 'audio/wav';
 	// Set the stream
 	recorder_temp.stream = stream;
 	// Mono audio (instead of stereo)
-	recorder_temp.audioChannels = 1; // Is this important?
+	recorder_temp.audioChannels = stereo;
 
 	// ondataavailable is an event (like 'onclick()') which fires when blog data is available
-	recorder_temp.ondataavailable = function(blob) {
-		// for debugging - not used anymore
-	};
+	// recorder_temp.ondataavailable = function(blob) {
+	// };
 
-	// get blob after specific time interval
+	// Get blob after specific time interval
 	recorder_temp.start(time_interval);
-	//Add the new recorder to the array
+	// Add the new recorder to the array
 	current_recordings.push([filename, recorder_temp, record_timestamp]);
 	num_recording_streams++;
 }
