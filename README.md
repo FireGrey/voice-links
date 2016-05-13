@@ -1,8 +1,8 @@
 # Voice Links Installation Guide
 
-*Caveat:* This application is a proof of concept and does not conform to web application security best practices. Caution should be taken before running any of the commands listed in the installation guide. Note that some commands use `example.com` as a placeholder domain.
+**Caveat:** This application is a proof of concept and does not conform to web application security best practices. Caution should be taken before running any of the commands listed in the installation guide. Note that some commands use `example.com` as a placeholder domain.
 
-This guide has been designed for *Ubuntu 14.04.3*
+This guide has been designed for **Ubuntu 14.04.3**
 
 ## Installing EasyRTC
 
@@ -29,41 +29,42 @@ You will now have a working installation of EasyRTC running on port 8080. Test t
 Supported browsers require HTTPS when using WebRTC.
 
 1. Create an SSL key and cert, replacing example.com with your domain
-```
-sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
-cd /opt/letsencrypt
-sudo -H ./letsencrypt-auto certonly --standalone -d example.com
-```
+	```
+	sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+	cd /opt/letsencrypt
+	sudo -H ./letsencrypt-auto certonly --standalone -d example.com
+	```
 
 2. `cd ~/easyrtc/server_example` and `nano server.js`
-Remove the following code
-```javascript
-var http    = require("http");
-```
 
-Insert the following code in its place
-```javascript
-var https = require("https");
-var fs = require("fs");
-```
+3. Remove the following code
+	```javascript
+	var http    = require("http");
+	```
 
-Remove the following code
-```javascript
-var webServer = http.createServer(httpApp).listen(8080);
-```
+4. Insert the following code in its place
+	```javascript
+	var https = require("https");
+	var fs = require("fs");
+	```
 
-Insert the following code in its place, replacing example.com with your domain
-``` javascript
-var webServer = https.createServer(
-{
-	key:	fs.readFileSync("/etc/letsencrypt/live/example.com/privkey.pem"),
-	cert:	fs.readFileSync("/etc/letsencrypt/live/example.com/cert.pem"),
-	ca:		fs.readFileSync("/etc/letsencrypt/live/example.com/chain.pem")
-},
-app).listen(8080);
-```
+5. Remove the following code
+	```javascript
+	var webServer = http.createServer(httpApp).listen(8080);
+	```
 
-4. Run `npm install` from inside the server_example directory again
+6. Insert the following code in its place, replacing example.com with your domain
+	``` javascript
+	var webServer = https.createServer(
+	{
+		key:	fs.readFileSync("/etc/letsencrypt/live/example.com/privkey.pem"),
+		cert:	fs.readFileSync("/etc/letsencrypt/live/example.com/cert.pem"),
+		ca:		fs.readFileSync("/etc/letsencrypt/live/example.com/chain.pem")
+	},
+	app).listen(8080);
+	```
+
+7. Run `npm install` from inside the server_example directory again
 
 You can now run `nodejs server.js` to run EasyRTC with HTTPS support.
 
@@ -90,13 +91,13 @@ Clone the `voice-links` web application.
 
 1. Run `mysql -u root -p < /var/www/voice-links/DB.sql`
 2. `nano /etc/apache2/apache2.conf` and add the following
-```
-<Directory /var/www/voice-links>
-	Options Indexes FollowSymLinks
-	AllowOverride All
-	Require all granted
-</Directory>
-```
+	```
+	<Directory /var/www/voice-links>
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Require all granted
+	</Directory>
+	```
 3. `sudo a2enmod rewrite`
 4. `sudo service apache2 restart`
 5. `nano /etc/apache2/sites-available/000-default.conf` and add the following, replacing example.com with your domain
@@ -108,7 +109,7 @@ Clone the `voice-links` web application.
 ```
 6. `sudo service apache2 restart`
 7. `cd /opt/letsencrypt`
-8. Run, replacing example.com with your domain `./letsencrypt-auto --apache -d example.com`
+8. Run `./letsencrypt-auto --apache -d example.com` replacing example.com with your domain
 
 This will configure Voice Links to run at the base URL `example.com/`. If you chose to run Voice Links under a different base URL i.e. `example.com/some-directory/` you will need to update the `RewriteBase` in the `.htaccess` file to match.
 
