@@ -19,7 +19,7 @@ ul.users li {
 }
 
 #room-list {
-	text-transform: none;
+	text-transform: none !important;
 }
 
 /* Reset */
