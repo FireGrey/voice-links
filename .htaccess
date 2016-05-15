@@ -11,3 +11,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 # Internal rewrite of blah to blah.php
 RewriteRule ^(.*)$ $1.php
+
+# In case you're here wondering if setting CORS fixes the security errors you're getting in Firefox... It doesn't.

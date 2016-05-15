@@ -75,7 +75,7 @@ Test your configuration works inside a supported browser.
 ## Apache/PHP/MySQL (LAMP) Install
 
 1. Install the required dependancies for Voice Links `sudo apt-get -y install apache2 mysql-server php5-mysql php5 libapache2-mod-php5`
-2. Enter password `hh1488yoloswag` for MySQL root password
+2. Enter password `aREALLYsecurepa$$w0rd` for MySQL root password
 	* If you change the password make sure to edit `config.php` with the updated MySQL credentials
 3. Run `sudo mysql_install_db`
 4. Run `sudo mysql_secure_installation` and follow the instructions - defaults work fine
@@ -134,13 +134,13 @@ Firefox 46.0.1 -- Moderataly Supported (see bugs)
 ### Bugs
 
 1. `No Viable Ice` errors for heavily NAT'ed peers
-	* Workaround: Switch to a quieter connection source (3G, VPN)
+	* Workaround: Switch to a quieter connection  (3/4G tether from a mobile phone often works, VPN sometimes works)
 2. In Firefox, peers who join after recording has started are not included in recording
-	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.2)
+	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.3)
 3. Rare crash in Firefox when recording multiple peers
 	* Hard to replicate
 4. Chrome recordings are only saved as webm (inconvient format for audio editing)
-	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.2)
+	* Waiting for newer version of MediaStreamRecorder (possibly v1.3.3)
 5. HTML5 audio box timer freezes in Chrome with more than 2 peers
 	* Likely fixed in later versions of Chrome
 6. Output selection boxes blank for some Chrome users

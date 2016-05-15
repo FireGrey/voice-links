@@ -10,7 +10,7 @@ if (LIVE) {
 	// Database Creds
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
-	define('DB_PASS', 'hh1488yoloswag');
+	define('DB_PASS', 'aREALLYsecurepa$$w0rd');
 	define('DB_DATABASE', 'voicelinks');
 	// Error Reporting
 	error_reporting(0);
