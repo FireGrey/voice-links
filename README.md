@@ -75,7 +75,7 @@ Test your configuration works inside a supported browser.
 ## Apache/PHP/MySQL (LAMP) Install
 
 1. Install the required dependancies for Voice Links `sudo apt-get -y install apache2 mysql-server php5-mysql php5 libapache2-mod-php5`
-2. Enter password `hh1488yoloswag` for MySQL root password
+2. Enter password `aREALLYsecurepa$$w0rd` for MySQL root password
 	* If you change the password make sure to edit `config.php` with the updated MySQL credentials
 3. Run `sudo mysql_install_db`
 4. Run `sudo mysql_secure_installation` and follow the instructions - defaults work fine
