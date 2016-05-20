@@ -93,13 +93,13 @@ Clone the `voice-links` web application.
 
 1. Run `mysql -u root -p < /var/www/voice-links/DB.sql`
 2. `nano /etc/apache2/apache2.conf` and add the following
-	```
-	<Directory /var/www/voice-links>
-		Options Indexes FollowSymLinks
-		AllowOverride All
-		Require all granted
-	</Directory>
-	```
+```
+<Directory /var/www/voice-links>
+	Options Indexes FollowSymLinks
+	AllowOverride All
+	Require all granted
+</Directory>
+```
 3. `sudo a2enmod rewrite`
 4. `sudo service apache2 restart`
 5. `nano /etc/apache2/sites-available/000-default.conf` and add the following, replacing example.com with your domain
@@ -112,6 +112,8 @@ Clone the `voice-links` web application.
 6. `sudo service apache2 restart`
 7. `cd /opt/letsencrypt`
 8. Run `./letsencrypt-auto --apache -d example.com` replacing example.com with your domain
+	* Press enter at first prompt
+	* Slect "Secure" option at second prompt and press enter
 
 This will configure Voice Links to run at the base URL `example.com/`. If you chose to run Voice Links under a different base URL i.e. `example.com/some-directory/` you will need to update the `RewriteBase` in the `.htaccess` file to match.
 
