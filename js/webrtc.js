@@ -118,7 +118,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 function attach_sink_id(element, sink_id, output_selector) {
 	if (typeof element.sinkId !== 'undefined') {
 		element.setSinkId(sink_id).then(function() {
-			console.log('Success, audio output device attached: ' + sink_id + ' to ' + 'element with ' + element.title + ' as source.');
+			console.log('Success, audio output device attached: ' + sink_id + ' to ' + 'element with ' + element.id + ' as source.');
 		}).catch(function(error) {
 			var error_message = error;
 			if (error.name === 'SecurityError') {
