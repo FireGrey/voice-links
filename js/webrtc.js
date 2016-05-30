@@ -178,7 +178,8 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 	function change_audio_destination(event) {
 		var device_id = event.target.value;
 		var output_selector = event.target;
-		attach_sink_id(audio, device_id, output_selector);
+		var audio_element = document.getElementById(output_selector.id);
+		attach_sink_id(audio_element, device_id, output_selector);
 	}
 
 	function got_devices(device_infos) {
@@ -198,6 +199,7 @@ easyrtc.setStreamAcceptor(function(callerEasyrtcid, stream) {
 
 	if (is_chrome) {
 		var selector = document.createElement('select');
+		selector.setAttribute('id', audio.id);
 		table_cell_3.appendChild(selector);
 		table_row_3.appendChild(table_cell_3);
 		table.appendChild(table_row_3);
